@@ -190,16 +190,16 @@ Exemplo de importação de script externo:
 
 Nesta aula, aprendemos sobre a declaração e regras de variáveis em JavaScript:
 
-- **Definição**: Uma variável é um espaço na memória do computador destinado a armazenar dados (valores) que podem ser acessados e modificados durante a execução do programa.
+- **Variável**: É um espaço na memória do computador destinado a armazenar dados (valores) que podem ser acessados e modificados durante a execução do programa.
 
 - **`let` vs `var`**:
     - O curso utiliza `let` para declarar variáveis.
     - `var` é uma forma mais antiga e não será utilizada.
-    - Não é possível redeclarar uma variável criada com `let` no mesmo escopo.
 - **Declaração e Inicialização**:
     - Podemos declarar uma variável sem valor inicial: `let nome;`.
     - Nesse caso, o valor será `undefined`.
     - Podemos atribuir valor posteriormente: `nome = 'Valor';`.
+    - Não é possível redeclarar uma variável criada com `let` no mesmo escopo.
 - **Regras de Nomenclatura**:
     - **Palavras Reservadas**: Não podemos usar palavras reservadas da linguagem (ex: `let`, `console`, `if`).
     - **Nomes Significativos**: Variáveis devem ter nomes que descrevem seu conteúdo.
@@ -214,4 +214,32 @@ let nome = 'Eloisa'; // Declaração com valor
 let idade; // Declaração sem valor (undefined)
 idade = 25; // Atribuição posterior
 // let nome = 'Outro'; // Erro: não pode redeclarar
+```
+
+# Aula 06 - Constantes com const
+
+Nesta aula, aprendemos sobre o uso de constantes (`const`) em JavaScript:
+
+- **Constante**: É um identificador para um valor que, uma vez atribuído, não pode ser alterado (reatribuído) durante a execução do programa. É útil para valores que devem permanecer fixos.
+- **Regras de Nomenclatura**:
+    - **Palavras Reservadas**: Não podemos usar palavras reservadas da linguagem.
+    - **Nomes Significativos**: Constantes devem ter nomes que descrevam seu conteúdo.
+    - **Início do Nome**: Não podem começar com números. Devem começar com letras minúsculas (convenção).
+    - **Caracteres**: Não podem conter espaços ou traços.
+    - **camelCase**: Para nomes compostos, a primeira palavra é minúscula e as subsequentes iniciam com maiúscula (ex: `nomeCompletoDoCliente`).
+    - **Case-sensitive**: O JavaScript diferencia maiúsculas de minúsculas.
+- **Outras Regras**:
+    - **Inicialização Obrigatória**: Deve ser criada e inicializada ao mesmo tempo (ex: `const nome = 'Valor';`). Não é possível declarar sem valor (`const nome;` gera erro).
+    - **Imutabilidade**: Não podemos modificar o valor de uma constante após a atribuição.
+- **Tipagem Dinâmica**:
+    - O JavaScript infere o tipo da constante/variável com base no valor atribuído.
+    - `typeof(variavel)`: Comando para descobrir o tipo de dado.
+
+Exemplos:
+```javascript
+const nome = 'Eloisa';
+console.log(nome);
+console.log(typeof(nome)); // Exibe o tipo da constante (ex: string)
+// nome = 'Outro'; // Erro: Assignment to constant variable.
+// const idade; // Erro: Missing initializer in const declaration
 ```
