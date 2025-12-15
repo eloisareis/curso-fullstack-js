@@ -157,3 +157,33 @@ let nome2 = 'Eloisa';
 // Sem declaração (CRIA VARIÁVEL GLOBAL - NÃO FAÇA ISSO)
 nome3 = 'Ravena'; 
 ```
+
+# Aula 08 - Tipos de Dados Primitivos
+
+Nesta aula, aprendemos sobre os tipos de dados primitivos em JavaScript:
+
+- **String**: Dados de texto. Podem ser delimitados por aspas simples, aspas duplas ou crase (template strings).
+- **Number**: Representa tanto números inteiros quanto decimais (ponto flutuante).
+- **Undefined**: Representa uma variável que foi declarada mas não teve valor atribuído. Não aponta para nenhum local na memória.
+- **Null**: Valor nulo. Utilizado explicitamente para indicar que a variável está vazia ou não aponta para nada. Diferente de undefined, é uma atribuição intencional.
+- **Boolean**: Tipo lógico que possui apenas dois valores: `true` (verdadeiro) ou `false` (falso).
+
+Exemplos:
+```javascript
+// String
+let nome = 'Eloisa';
+let gato = "Ravena";
+let sobrenome = `Reis`;
+
+// Number
+let n1 = 0.3;
+let n2 = 590;
+
+// Undefined e Null
+let nomePessoa; // undefined
+let sobrenomePessoa = null; // null
+
+// Boolean
+const verdade = true;
+const falso = false;
+```
