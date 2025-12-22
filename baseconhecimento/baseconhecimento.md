@@ -187,3 +187,63 @@ let sobrenomePessoa = null; // null
 const verdade = true;
 const falso = false;
 ```
+
+# Aula 09 - Operadores Aritméticos, de Atribuição e Incremento
+
+Nesta aula, exploramos os operadores fundamentais para cálculos e manipulação de valores em JavaScript, além de conversão de tipos de dados.
+
+- **Operadores Aritméticos**:
+    - `+`: Adição ou Concatenação (se um dos valores for string).
+    - `-`: Subtração.
+    - `*`: Multiplicação.
+    - `/`: Divisão.
+    - `**`: Potenciação (Elevado a).
+    - `%`: Resto da divisão.
+
+- **Precedência de Operadores**:
+    A ordem de execução das contas segue a matemática padrão:
+    1. Parênteses `()`
+    2. Potenciação `**`
+    3. Multiplicação, Divisão e Resto `*` `/` `%`
+    4. Adição e Subtração `+` `-`
+
+- **Operadores de Incremento e Decremento**:
+    - `++`: Adiciona 1 ao valor da variável.
+    - `--`: Subtrai 1 do valor da variável.
+    - **Pós-fixado** (`variável++`): Retorna o valor atual e *depois* incrementa.
+    - **Pré-fixado** (`++variável`): Incrementa o valor e *depois* retorna o novo valor.
+
+- **Operadores de Atribuição**:
+    - Permitem atualizar o valor de uma variável com base em uma operação.
+    - Exemplos: `+=` (soma e atribui), `-=` (subtrai e atribui), `*=` (multiplica e atribui), etc.
+
+- **Conversão de Tipos (Parsing)**:
+    - Às vezes precisamos converter strings numéricas para números reais para realizar cálculos.
+    - `parseInt('valor')`: Converte para número inteiro.
+    - `parseFloat('valor')`: Converte para número de ponto flutuante (decimal).
+    - `Number('valor')`: Converte para número (infere se é inteiro ou decimal).
+
+Exemplos:
+```javascript
+const n1 = 9;
+const n2 = 4;
+
+console.log(n1 + n2);      // 13 (Soma)
+console.log('9' + n2);     // '94' (Concatenação)
+console.log(n2 ** 2);      // 16 (Potenciação)
+console.log(n1 % n2);      // 1 (Resto de 9 dividido por 4)
+
+// Incremento
+let i = 0;
+console.log(i++); // 0 (Mostra, depois incrementa)
+console.log(++i); // 2 (Incrementa agora para 2, depois mostra)
+
+// Atribuição
+let d = 10;
+d += 5; // d = d + 5; (Agora d vale 15)
+
+// Conversão
+const numStr = "5";
+const numInt = parseInt(numStr);
+console.log(typeof numInt); // 'number'
+```
