@@ -247,3 +247,32 @@ const numStr = "5";
 const numInt = parseInt(numStr);
 console.log(typeof numInt); // 'number'
 ```
+
+# Aula 10 - Alert, Confirm e Prompt
+
+Nesta aula, aprendemos sobre três métodos do objeto `window` utilizados para interagir com o usuário no navegador:
+
+- **`alert('mensagem')`**: Exibe uma caixa de alerta. Retorna `undefined`.
+- **`confirm('mensagem')`**: Exibe uma caixa de confirmação com opções "OK" e "Cancelar". Retorna um valor booleano (`true` se OK, `false` se Cancelar).
+- **`prompt('mensagem')`**: Exibe uma caixa de entrada que permite ao usuário digitar um texto. Retorna o texto digitado como uma **string** ou `null` se o usuário cancelar.
+
+**Observações Importantes**:
+- Essas funções pausam a execução do script até que o usuário interaja com elas.
+- O `prompt` sempre retorna o valor como **string**, mesmo que sejam números. Para operações matemáticas, é necessário converter o valor (ex: `Number()`, `parseInt()`, `parseFloat()`).
+
+Exemplos:
+```javascript
+// Alert
+alert('Bem-vindo ao sistema!');
+
+// Confirm
+const desejaApagar = confirm('Tem certeza que deseja apagar?');
+console.log(desejaApagar); // true ou false
+
+// Prompt
+const nome = prompt('Digite seu nome:'); 
+console.log(nome); // Retorna o texto
+
+const num1 = prompt('Digite um ano:'); 
+console.log(typeof num1); // 'string'
+```
