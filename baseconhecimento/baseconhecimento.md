@@ -276,3 +276,69 @@ console.log(nome); // Retorna o texto
 const num1 = prompt('Digite um ano:'); 
 console.log(typeof num1); // 'string'
 ```
+
+# Aula 11 - Mais sobre Strings
+
+Nesta aula, aprofundamos o conhecimento sobre manipulação de strings em JavaScript:
+
+- **Caractere de Escape**: A barra invertida (`\`) é usada para "escapar" caracteres especiais, permitindo exibir aspas dentro de uma string delimitada pelo mesmo tipo de aspa (ex: `\"texto\"`).
+- **Indexação**: Strings são iteráveis e indexadas, ou seja, cada caractere possui uma posição numérica começando do 0.
+    - `012345678910`
+    - `Eloisa Reis`
+
+- **Métodos e Propriedades Úteis**:
+    - **Acesso a caracteres**:
+        - `str[i]`: Acessa o caractere no índice `i`.
+        - `str.charAt(i)`: Função equivalente para acessar o caractere no índice.
+    - **Concatenação**:
+        - `str.concat(' texto')`: Junta strings.
+        - Template Strings `${}`: Forma mais moderna de concatenação.
+    - **Busca**:
+        - `indexOf('texto')`: Retorna o índice onde começa a primeira ocorrência do texto (ou -1 se não encontrar). Aceita um segundo parâmetro para iniciar a busca a partir de um índice específico.
+        - `lastIndexOf('texto')`: Retorna o índice da última ocorrência do texto.
+        - `search(/regex/)`: Busca usando expressões regulares.
+        - `match(/[a-z]/g)`: Retorna um array com as correspondências encontradas pela expressão regular.
+    - **Substituição**:
+        - `replace('antigo', 'novo')`: Substitui a primeira ocorrência do texto. Aceita expressões regulares para substituir todas as ocorrências (ex: `/letra/g`).
+    - **Fatiamento (Extração)**:
+        - `slice(inicio, fim)`: Retorna uma parte da string do índice `inicio` até `fim` (não incluso).
+        - `slice(negativo)`: Com valores negativos, fatia a partir do final da string.
+    - **Tamanho**:
+        - `length`: Propriedade que retorna o tamanho total da string.
+    - **Conversão de Caixa**:
+        - `toUpperCase()`: Converte tudo para maiúsculas.
+        - `toLowerCase()`: Converte tudo para minúsculas.
+
+Exemplos:
+```javascript
+// Escape de caracteres
+console.log("Um \"texto\"");
+console.log("Um \\texto");
+
+// Indexação
+let strg = 'Eloisa Reis';
+console.log(strg[7]);        // 'R'
+console.log(strg.charAt(7)); // 'R'
+
+// Concatenação
+console.log(strg.concat(" a mais linda."));
+console.log(`${strg} a mais linda.`);
+
+// Busca
+console.log(strg.indexOf('reis')); // -1 (Case sensitive)
+console.log(strg.indexOf('i', 7)); // Busca 'i' a partir do índice 7
+console.log(strg.lastIndexOf('E'));
+console.log(strg.search(/R/)); 
+
+// Substituição
+console.log(strg.replace('Eloisa', 'Ravena')); 
+
+// Tamanho e Fatiamento
+console.log(strg.length);
+console.log(strg.slice(7, 11)); // 'Reis'
+console.log(strg.slice(-4));    // 'Reis' (pega os 4 últimos)
+
+// Maiúsculas e Minúsculas
+console.log(strg.toUpperCase());
+console.log(strg.toLowerCase());
+```
