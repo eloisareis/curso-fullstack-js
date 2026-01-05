@@ -342,3 +342,29 @@ console.log(strg.slice(-4));    // 'Reis' (pega os 4 últimos)
 console.log(strg.toUpperCase());
 console.log(strg.toLowerCase());
 ```
+
+# Aula 12 - Mais sobre Numbers
+
+Nesta aula, aprendemos algumas funções úteis para manipulação de números e sobre a imprecisão de cálculos com ponto flutuante:
+
+- **Conversão para String**:
+    - `num.toString()`: Converte um número para string.
+    - `num.toString(2)`: Converte o número para sua representação binária.
+
+- **Casas Decimais**:
+    - `num.toFixed(2)`: Fixa o número de casas decimais (ex: 2 casas). Retorna uma string.
+
+- **Verificações**:
+    - `Number.isInteger(num)`: Retorna `true` se o número for inteiro, `false` caso contrário.
+    - `Number.isNaN(temp)`: Retorna `true` se a variável for "Not a Number".
+
+- **Imprecisão com Ponto Flutuante (IEEE 754-2008)**:
+    - Cálculos com decimais podem ter pequenas imprecisões (ex: `0.7 + 0.1` resulta em `0.7999999999999999`).
+    - **Solução 1**: Usar `parseFloat()` e `toFixed()`:
+        ```javascript
+        num = parseFloat(num.toFixed(2));
+        ```
+    - **Solução 2**: Matemática (multiplicar e dividir por 100):
+        ```javascript
+        num = ((num1 * 100) + (num2 * 100)) / 100;
+        ```
