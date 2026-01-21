@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercicios</title>
+</head>
+<body>
+    <script>
+        const n_digitado = Number(prompt('Digite um número:'));
+
+        let raiz = n_digitado ** 0.5;
+        let inteiro = !! (Math.round(n_digitado) == n_digitado);
+        let e_nulo = Number.isNaN(n_digitado);
+        let arr_baixo = Math.floor(n_digitado);
+        let arr_cima = Math.ceil(n_digitado);
+        
+        document.body.innerHTML += `<h1>Seu número é ${n_digitado}</h1>`;
+        document.body.innerHTML += `Raiz quadrada: ${raiz} <br />`;
+        document.body.innerHTML += `${n_digitado} é inteiro: ${inteiro} <br />`;
+        document.body.innerHTML += `é NaN: ${e_nulo} <br />`;
+        document.body.innerHTML += `Arredondado para baixo ${arr_baixo} <br />`;
+        document.body.innerHTML += `Arredondado para cima ${arr_cima} <br />`;
+        document.body.innerHTML += `Com duas casas decimais ${n_digitado.toFixed(2)}`;
+    </script>
+</body>
+</html>
