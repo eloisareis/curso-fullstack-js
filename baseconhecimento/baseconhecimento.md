@@ -368,3 +368,77 @@ Nesta aula, aprendemos algumas funções úteis para manipulação de números e
         ```javascript
         num = ((num1 * 100) + (num2 * 100)) / 100;
         ```
+
+# Aula 13 - Objeto Math
+
+Nesta aula, conhecemos o objeto global `Math`, que possui métodos e propriedades para operações matemáticas mais complexas:
+
+- **Arredondamento**:
+    - `Math.floor(n)`: Arredonda o número para baixo (para o menor inteiro).
+    - `Math.ceil(n)`: Arredonda o número para cima (para o maior inteiro).
+    - `Math.round(n)`: Arredonda para o inteiro mais próximo (0.5+ arredonda para cima, abaixo disso para baixo).
+- **Mínimo e Máximo**:
+    - `Math.max(n1, n2, ...)`: Retorna o maior número de uma lista de argumentos.
+    - `Math.min(n1, n2, ...)`: Retorna o menor número de uma lista de argumentos.
+- **Aleatório**:
+    - `Math.random()`: Gera um número aleatório pseudo-aleatório entre 0 (inclusivo) e 1 (exclusivo).
+
+Exemplos:
+```javascript
+let n1 = 9.54578;
+// let n2 = Math.floor(n1); // 9
+// let n3 = Math.ceil(n1);  // 10
+// let n4 = Math.round(n1); // 10
+
+console.log(Math.max(1, 2, 3, 4, -30, -50, 1500, 9, 8, 7, 6)); // 1500
+console.log(Math.min(1, 2, 3, 4, -30, -50, 1500, 9, 8, 7, 6)); // -50
+console.log(Math.random()); // Ex: 0.1234...
+```
+
+# Aula 14 - Arrays (Básico)
+
+Nesta aula, introduzimos os Arrays, uma estrutura de dados fundamental:
+
+- **Definição**: Arrays são utilizados para armazenar uma coleção sequencial de elementos. Geralmente do mesmo tipo, mas em JS aceitam tipos mistos.
+- **Indexação**: São indexados numericamente, começando do índice 0.
+- **Criação**: `const array = ['Valor1', 'Valor2'];`
+- **Operações Básicas**:
+    - **Acesso**: `array[indice]`
+    - **Modificação**: `array[indice] = novoValor`
+    - **Tamanho**: `array.length` (retorna a quantidade de elementos).
+- **Métodos de Adição e Remoção**:
+    - `push('valor')`: Adiciona um elemento ao **final** do array.
+    - `unshift('valor')`: Adiciona um elemento ao **início** do array.
+    - `pop()`: Remove o elemento do **final** do array.
+    - `shift()`: Remove o elemento do **início** do array.
+    - `delete array[indice]`: Remove o valor do índice, mas deixa a posição vazia (`empty item`).
+- **Outros Métodos**:
+    - `slice(inicio, fim)`: Fatio o array, retornando uma cópia de uma parte dele.
+    - `instanceof Array`: Verifica se a variável é um array (retorna `true/false`). `typeof` retorna `'object'`.
+
+Exemplos:
+```javascript
+// Criação
+const amigos = ['Eloisa', 'Pedro', 'Ricardo', 'Amanda'];
+
+// Acesso e Edição
+console.log(amigos[0]); // 'Eloisa'
+amigos[1] = 'Pedro Augusto';
+
+// Adição
+amigos.push('Ciclano');    // Adiciona no fim
+amigos.unshift('Fulano');  // Adiciona no início
+
+// Remoção
+amigos.pop();   // Remove do fim
+amigos.shift(); // Remove do início
+// delete amigos[3]; // Remove valor, mantém buraco
+
+// Fatiamento
+console.log(amigos.slice(0, 3)); // Pega os 3 primeiros
+
+// Verificação
+console.log(typeof amigos); // 'object'
+console.log(amigos instanceof Array); // true
+```
+
