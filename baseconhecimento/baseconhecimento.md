@@ -442,3 +442,67 @@ console.log(typeof amigos); // 'object'
 console.log(amigos instanceof Array); // true
 ```
 
+# Aula 15 - Const com valores mutáveis
+
+Nesta aula, aprendemos a diferença entre variável e valor, e como `const` se comporta com tipos primivitos e estruturas de dados mutáveis:
+
+- **Variável x Valor**: 
+    - Variáveis funcionam como um 'apelido' para um valor, uma referência na memória.
+    - Valores são os dados reais guardados na memória.
+- **Tipos Primitivos (Imutáveis)**:
+    - Tipos como `number`, `string`, `boolean`, `undefined`, `null`, `symbol` e `bigint` são imutáveis.
+    - Quando declarados com `const`, nem a variável pode ser reatribuída, nem o valor pode ser alterado.
+- **Estruturas de Dados (Mutáveis)**:
+    - Tipos complexos como `arrays` e objetos em geral são mutáveis.
+    - Quando usamos `const` com objetos ou arrays, a variável não pode ser reatribuída (não podemos usar `=`), mas os seus **valores internos podem ser alterados**. A constante continua apontando para o mesmo local de memória.
+
+Exemplos:
+```javascript
+// Valores internos de um Array com const podem ser modificados
+const array = [1, 2, 3, 4, 5];
+array.pop();
+array[0] = 1024;
+console.log(array); // [ 1024, 2, 3, 4 ]
+
+// O que NÃO pode (reatribuição):
+// array = 'Legal'; // Erro: Assignment to constant variable.
+```
+
+# Aula 16 - Funções
+
+Nesta aula, aprendemos sobre funções, que são trechos de código criados para executar ações específicas e podem ser reutilizados:
+
+- **Declaração Clássica**: Inicia com a palavra-chave `function`, seguida do nome, parâmetros (entre parênteses) e o corpo da função (entre chaves).
+- **Parâmetros**: Valores que a função pode receber para processar as informações internamente.
+- **Retorno (`return`)**: 
+    - Funções podem ou não ter um `return`.
+    - Se não tiver `return` (ou se o `return` estiver vazio), a função retorna `undefined`.
+    - O `return` finaliza a execução da função e devolve o valor processado para onde a função foi chamada.
+- **Funções Anônimas**: Funções sem nome que podem ser atribuídas a uma variável. Utiliza-se a palavra `function` normalmente, sem nomeá-la.
+- **Arrow Functions**: Uma sintaxe mais curta e moderna para escrever funções anônimas, usando a "seta" `=>`. Se a função possuir apenas uma expressão e um parâmetro, os parênteses em torno do parâmetro, as chaves (`{}`) e a palavra `return` podem ser omitidos.
+
+Exemplos:
+```javascript
+// Função Clássica sem retorno
+function saudacao(nome) {
+    console.log(`Boa tarde ${nome}`);
+}
+saudacao('Eloisa'); // Executa a ação, mas o retorno é undefined
+
+// Função com retorno
+function soma(a, b) {
+    return a + b;
+}
+const resultado = soma(5, 3);
+console.log(resultado); // 8
+
+// Função Anônima atribuída a uma variável
+const raizQuadrada = function(num) {
+    return num ** 0.5;
+}
+console.log(raizQuadrada(16)); // 4
+
+// Arrow Function
+const raizQuadrada2 = num => num ** 0.5; 
+console.log(raizQuadrada2(25)); // 5
+```
