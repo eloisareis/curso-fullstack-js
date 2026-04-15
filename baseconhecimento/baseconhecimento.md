@@ -506,3 +506,68 @@ console.log(raizQuadrada(16)); // 4
 const raizQuadrada2 = num => num ** 0.5; 
 console.log(raizQuadrada2(25)); // 5
 ```
+
+# Aula 18 - Objetos (Básico)
+
+Nesta aula, aprendemos os conceitos básicos sobre **Objetos** em JavaScript, uma estrutura de dados fundamental para representar entidades do mundo real:
+
+- **Criação de Objetos**:
+    - Objetos são criados utilizando chaves `{}` (notação literal).
+    - Eles armazenam dados no formato de **chave: valor** (propriedades e seus valores).
+    - **Acesso a Propriedades**: Podemos acessar o valor de uma propriedade usando a notação de ponto (ex: `objeto.propriedade`).
+
+- **Factory Functions (Funções Fábrica)**:
+    - São funções que **retornam um objeto**.
+    - Muito úteis para criar múltiplos objetos com a mesma estrutura, evitando a repetição de código.
+    - **Sintaxe Curta**: Se o nome do parâmetro for igual ao nome da chave no objeto, podemos omitir a atribuição (ex: usar apenas `nome,` em vez de `nome: nome,`).
+
+- **Métodos de Objetos**:
+    - Funções que estão dentro de um objeto são chamadas de **métodos**.
+    - Para declarar um método, não precisamos da palavra `function`, basta o nome seguido de parênteses e chaves (ex: `olaPessoa() { ... }`).
+    
+- **Uso do `this`**:
+    - Dentro de um método de objeto, a palavra-chave `this` refere-se ao **próprio objeto**.
+    - É utilizado para acessar as propriedades ou outros métodos do mesmo objeto (ex: `this.nome`).
+
+Exemplos:
+```javascript
+// Criação de Objeto Literal
+const pessoa = {
+    nome: 'Eloisa',
+    idade: 20,
+    profissao: 'Programadora'
+};
+console.log(pessoa.nome); // 'Eloisa'
+
+// Factory Function
+function criarPessoa(nome, sobrenome, idade, profissao) {
+    return {
+        nome,      // Sintaxe curta (equivale a nome: nome)
+        sobrenome,
+        idade,
+        profissao
+    };
+}
+const pessoa1 = criarPessoa('Eloisa', 'Reis', 20, 'Programadora');
+console.log(pessoa1);
+
+// Métodos e a palavra-chave `this`
+const pessoa2 = {
+    nome: 'Eloisa',
+    sobrenome: 'Reis',
+    idade: 20,
+
+    olaPessoa() {
+        // Acessando propriedades do próprio objeto com this
+        console.log(`Olá meu nome é ${this.nome} ${this.sobrenome} e tenho ${this.idade} anos de idade.`);
+    },
+
+    incrementaIdade() {
+        ++this.idade; // Alterando propriedade do próprio objeto
+    }
+};
+
+pessoa2.olaPessoa();
+pessoa2.incrementaIdade();
+pessoa2.olaPessoa();
+```
