@@ -571,3 +571,43 @@ pessoa2.olaPessoa();
 pessoa2.incrementaIdade();
 pessoa2.olaPessoa();
 ```
+
+# Aula 19 - Valores primitivos e valores por referência
+
+Nesta aula, aprendemos a diferença entre como os valores primitivos e os valores por referência são armazenados e copiados na memória:
+
+- **Valores Primitivos (Imutáveis)**:
+    - Tipos: `string`, `number`, `boolean`, `undefined`, `null` (além de `symbol` e `bigint`).
+    - **Cópia por valor**: Quando atribuímos uma variável primitiva a outra (ex: `let b = a`), o **valor** é copiado. As duas variáveis ficam independentes. Alterar uma não afeta a outra.
+
+- **Valores por Referência (Mutáveis)**:
+    - Tipos: `array`, `object`, `function`.
+    - **Cópia por referência**: Quando atribuímos uma variável de referência a outra (ex: `let d = c`), não copiamos o valor, mas sim a **referência (endereço) na memória**. Ambas as variáveis passam a apontar para o mesmo local. Alterar o conteúdo através de uma variável afetará a outra.
+    - **Cópia real (Independente)**: Para fazer uma cópia real e independente (shallow copy) de um array ou objeto, podemos usar o **Spread Operator (`...`)**.
+
+Exemplos:
+```javascript
+// Valores Primitivos (Cópia por valor)
+let a = 'A';
+let b = a; // B recebe uma cópia do valor de A ('A')
+console.log(a, b); // 'A' 'A'
+
+a = 'Outra coisa'; // Alterar A não afeta B
+console.log(a, b); // 'Outra coisa' 'A'
+
+// Valores por Referência (Cópia por referência)
+let c = [1, 2, 3];
+let d = c;         // D aponta para o MESMO array que C na memória
+let e = [...c];    // E recebe uma cópia real (novo array) com os valores de C
+
+c.push(4);         // Alteramos o array original através de C
+console.log(c, d); // [1, 2, 3, 4] [1, 2, 3, 4] (D reflete a mudança)
+console.log(c, e); // [1, 2, 3, 4] [1, 2, 3] (E NÃO reflete a mudança, pois é independente)
+
+// Objeto (Cópia por referência)
+const pessoa = { nome: "Eloisa", sobrenome: "Reis" };
+const pessoaCopia = pessoa; // Apontam para o mesmo objeto
+
+pessoa.nome = "Ravena"; 
+console.log(pessoa, pessoaCopia); // Ambas terão nome "Ravena"
+```
