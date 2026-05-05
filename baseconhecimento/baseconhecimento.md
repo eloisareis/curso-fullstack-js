@@ -611,3 +611,99 @@ const pessoaCopia = pessoa; // Apontam para o mesmo objeto
 pessoa.nome = "Ravena"; 
 console.log(pessoa, pessoaCopia); // Ambas terão nome "Ravena"
 ```
+
+# Aula 20 - Operadores de Comparação
+
+Nesta aula, aprendemos sobre os operadores de comparação, que são utilizados para comparar valores e retornam um valor booleano (`true` ou `false`):
+
+- `>` : Maior que
+- `<` : Menor que
+- `>=` : Maior ou igual a
+- `<=` : Menor ou igual a
+- `==` : Igualdade (compara apenas o valor, fazendo coerção de tipo se necessário)
+- `===`: Igualdade estrita (compara tanto o valor quanto o tipo do dado)
+- `!=` : Diferente (compara apenas o valor)
+- `!==`: Diferente estrito (compara valor e tipo)
+
+**Boa prática:** É recomendado o uso dos operadores estritos (`===` e `!==`) para evitar resultados inesperados causados pela conversão automática de tipos que o JavaScript realiza.
+
+Exemplos:
+```javascript
+console.log(10 > 5);      // true
+console.log(10 < 5);      // false
+console.log(10 >= 10);    // true
+console.log(10 <= 9);     // false
+console.log(10 == '10');  // true (coerção de tipo)
+console.log(10 === '10'); // false (tipos diferentes)
+console.log(10 != '10');  // false
+console.log(10 !== '10'); // true
+```
+
+# Aula 21 - Operadores Lógicos
+
+Nesta aula, foram introduzidos os operadores lógicos, usados para combinar ou inverter expressões booleanas:
+
+- `&&` (AND / E): Retorna `true` se **todas** as condições forem verdadeiras.
+- `||` (OR / OU): Retorna `true` se **pelo menos uma** das condições for verdadeira.
+- `!` (NOT / NÃO): Inverte o valor booleano (de `true` para `false` e vice-versa).
+
+Exemplos:
+```javascript
+console.log(true && false); // false
+console.log(true || false); // true
+console.log(!true);         // false
+console.log(!false);        // true
+```
+
+# Aula 22 - Avaliação de Curto-Circuito (Short-Circuit)
+
+Nesta aula, aprendemos como os operadores lógicos `&&` e `||` se comportam na prática em JavaScript:
+
+- **Curto-Circuito**: Os operadores avaliam a expressão apenas até onde é necessário para determinar o resultado final, parando a execução assim que o resultado já é garantido.
+    - No `&&` (AND): Para no primeiro valor **falso** encontrado e o retorna. Se todos forem verdadeiros, retorna o último.
+    - No `||` (OR): Para no primeiro valor **verdadeiro** encontrado e o retorna. Se todos forem falsos, retorna o último.
+
+- **Valores FALSY**: São valores que, quando avaliados em um contexto booleano, são considerados como `false`.
+    - `0`
+    - `""` (string vazia)
+    - `null`
+    - `undefined`
+    - `NaN`
+    - `false`
+    *(Qualquer valor diferente destes é considerado **TRUTHY**).*
+
+Exemplos:
+```javascript
+// Exemplo com && (AND)
+const a = true;
+const b = false;
+const resultadoAnd = a && b; // Curto-circuito: retorna false porque "b" é false
+console.log(resultadoAnd);
+
+// Exemplo com || (OR)
+const c = true;
+const d = false;
+const resultadoOr = c || d; // Curto-circuito: retorna true logo no "c" e ignora o resto
+console.log(resultadoOr);
+```
+
+# Aula 23 - Estruturas Condicionais (if, else if, else)
+
+Nesta aula, conhecemos as estruturas de controle de fluxo condicional, fundamentais para a lógica de programação:
+
+- `if` (se): Executa um bloco de código se a condição fornecida for verdadeira. Pode ser usado sozinho.
+- `else if` (senão se): Usado para testar múltiplas condições consecutivas. Se a condição anterior foi falsa, ele testa esta nova. O bloco de código será executado na primeira condição que for verdadeira. Opcional, mas deve vir após o `if`.
+- `else` (senão): Executa um bloco de código se **todas** as condições anteriores (do `if` e `else if`) forem falsas. É opcional e deve ser sempre o último bloco.
+
+Exemplos:
+```javascript
+const hora = 18;   
+
+if (hora < 12) {
+    console.log("Bom dia!");
+} else if (hora >= 12 && hora < 18) {
+    console.log("Boa tarde!");
+} else {
+    console.log("Boa noite!");
+}
+```
