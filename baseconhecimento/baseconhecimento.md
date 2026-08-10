@@ -695,7 +695,7 @@ Nesta aula, conhecemos as estruturas de controle de fluxo condicional, fundament
 - `else if` (senão se): Usado para testar múltiplas condições consecutivas. Se a condição anterior foi falsa, ele testa esta nova. O bloco de código será executado na primeira condição que for verdadeira. Opcional, mas deve vir após o `if`.
 - `else` (senão): Executa um bloco de código se **todas** as condições anteriores (do `if` e `else if`) forem falsas. É opcional e deve ser sempre o último bloco.
 
-Exemplos:
+Exemplos de código:
 ```javascript
 const hora = 18;   
 
@@ -706,4 +706,207 @@ if (hora < 12) {
 } else {
     console.log("Boa noite!");
 }
+```
+
+# Aula 24 - if, else if, else (Parte 2)
+
+Nesta aula, aprofundamos o funcionamento das estruturas condicionais `if`, `else if` e `else`:
+
+- **Execução em Cadeia**: Quando usamos `else if`, o JavaScript testa as condições sequencialmente. O primeiro bloco que retornar uma condição verdadeira será o único executado, e todos os blocos seguintes serão ignorados, mesmo que suas condições também sejam verdadeiras.
+- **Blocos Independentes**: Um código fora do bloco condicional ou em um `if` separado será executado independentemente das condições anteriores. O `else` e `else if` devem sempre estar diretamente conectados a um `if` precedente.
+
+Exemplos de código:
+```javascript
+const numero = 10;
+
+// Exemplo simples com if e else
+if (numero >= 0 && numero <= 5) {
+    console.log("O número está entre 0 e 5.");
+} else {
+    console.log("O número não está entre 0 e 5."); // Executado caso o if seja falso
+}
+
+// Exemplo com múltiplos else if
+if (numero >= 0 && numero <= 5) {
+    console.log("O número está entre 0 e 5.");
+} else if (numero >= 6 && numero <= 8) {
+    console.log("O número está entre 6 e 8.");
+} else if (numero >= 9 && numero <= 11) {
+    console.log("O número está entre 9 e 11."); // O primeiro bloco verdadeiro executa e para a cadeia
+} else {
+    console.log("O numero não está entre 0 e 11.");
+}
+```
+
+# Aula 25 - Operação Ternária
+
+Nesta aula, aprendemos a utilizar o operador ternário, uma alternativa concisa ao uso de `if/else` para atribuição de valores condicionais:
+
+- **Sintaxe**: `condição ? valor_se_verdadeiro : valor_se_falso`
+- **Uso ideal**: Indicado para simplificar códigos de decisões simples e atribuições diretas baseadas em uma condição booleana.
+
+Exemplos de código:
+```javascript
+const pontuacaoUser = 1000;
+// Condição ? Caso Verdadeiro : Caso Falso
+const nivelUser = pontuacaoUser >= 1000 ? 'Usuário VIP' : 'Usuário normal';
+
+console.log(nivelUser); // Exibe: 'Usuário VIP'
+```
+
+# Aula 26 - Objeto Date
+
+Nesta aula, aprendemos a trabalhar com datas e horas no JavaScript através do objeto integrado `Date`:
+
+- **Instanciação**:
+  - `new Date()`: Cria um objeto com a data e hora atual.
+  - `new Date(ano, mes, dia, hora, minuto, segundo, milissegundo)`: Cria uma data específica.
+- **Indexação de Meses**: No JavaScript, os meses começam do índice 0 (Janeiro) até 11 (Dezembro). Para exibir ou manipular o mês no formato convencional (1 a 12), deve-se somar 1.
+- **Dia da Semana**: O método `.getDay()` retorna um número de 0 (Domingo) a 6 (Sábado).
+- **Unix Epoch / Timestamp**: A contagem de tempo é baseada nos milissegundos transcorridos desde 01/01/1970. O comando `Date.now()` retorna o timestamp atual.
+
+Métodos úteis:
+- `getDate()`: Retorna o dia do mês.
+- `getFullYear()`: Retorna o ano com 4 dígitos.
+- `getMonth()`: Retorna o mês (0-11).
+- `getHours()`: Retorna as horas (0-23).
+- `getMinutes()`: Retorna os minutos.
+- `getSeconds()`: Retorna os segundos.
+- `getMilliseconds()`: Retorna os milissegundos.
+- `getDay()`: Retorna o dia da semana.
+
+Exemplos de código:
+```javascript
+// Cria uma data específica: 28/02/2019 às 14:30:27
+const data = new Date(2019, 1, 28, 14, 30, 27); 
+console.log(data.toString()); 
+
+console.log('dia', data.getDate());
+console.log('ano', data.getFullYear());
+console.log('mes', data.getMonth() + 1); // Soma 1 para ajustar
+console.log('hora', data.getHours());
+console.log('minuto', data.getMinutes());
+console.log('segundo', data.getSeconds());
+console.log('milissegundo', data.getMilliseconds());
+console.log('dia da semana', data.getDay()); // 4 (Quinta-feira)
+
+console.log(Date.now()); // Retorna o timestamp atual em milissegundos
+const data2 = new Date(1785267986461); // Cria data a partir do timestamp
+console.log(data2.toString());
+```
+
+# Aula 27 - Switch/Case
+
+Nesta aula, conhecemos a estrutura condicional `switch/case`, indicada para simplificar múltiplos fluxos condicionais baseados no valor de uma única variável:
+
+- **Estrutura**: Compara o valor de uma expressão com diferentes cláusulas `case`.
+- **Palavra-chave `break`**: É fundamental para interromper a execução do bloco condicional assim que o caso correspondente for executado. Se omitido, o código continua executando os casos subsequentes (`fall-through`).
+- **Cláusula `default`**: Opcional, funciona de forma similar ao `else`, sendo executada se nenhum dos casos anteriores for correspondido.
+
+Exemplos de código:
+```javascript
+const date = new Date();
+const diaSemana = date.getDay();
+let diaSemanaTexto; 
+
+switch (diaSemana) {
+    case 0:
+        diaSemanaTexto = 'Domingo';
+        break;
+    case 1:
+        diaSemanaTexto = 'Segunda-feira';
+        break;
+    case 2:
+        diaSemanaTexto = 'Terça-feira';
+        break;
+    case 3:
+        diaSemanaTexto = 'Quarta-feira';
+        break;
+    case 4:
+        diaSemanaTexto = 'Quinta-feira';
+        break;
+    case 5:
+        diaSemanaTexto = 'Sexta-feira';
+        break;
+    case 6:
+        diaSemanaTexto = 'Sábado';
+        break;
+    default:
+        diaSemanaTexto = '';
+}
+
+console.log(diaSemana, diaSemanaTexto);
+```
+
+# Aula 28 - Mais diferenças entre var, let e const
+
+Nesta aula, revisamos em detalhes e aprofundamos as diferenças de escopo e comportamento entre as formas de declaração de variáveis:
+
+- **Escopo**:
+  - `let` e `const` possuem **escopo de bloco** (delimitado por `{ ... }`). Uma nova variável pode ser declarada com o mesmo nome dentro de um bloco interno sem interferir na variável do bloco externo.
+  - `var` possui **escopo de função** ou global. Se declarada em blocos condicionais ou loops, ela vaza o escopo desses blocos e afeta o escopo pai (global ou da função).
+- **Redeclaração**:
+  - `var` permite que uma variável com o mesmo nome seja declarada novamente no mesmo escopo.
+  - `let` e `const` geram erro ao tentar redeclarar no mesmo escopo.
+- **Reatribuição**:
+  - `let` e `var` permitem reatribuir valores.
+  - `const` proíbe qualquer tentativa de reatribuição direta.
+- **Hoisting (Içamento)**:
+  - Variáveis do tipo `var` sofrem hoisting, o que significa que sua declaração é içada para o topo do escopo, sendo inicializadas com o valor `undefined`. Isso permite que a variável seja chamada antes da linha de sua declaração no código sem gerar erro de referência.
+  - `let` e `const` não inicializam até sua linha de execução real ser processada.
+
+Exemplos de código:
+```javascript
+let nome = 'Eloisa';
+var nome2 = 'Ravena';
+
+if (true) {
+    let nome = 'Amora'; // Cria uma variável diferente no escopo do bloco
+    var nome2 = 'Shuri'; // Redeclara e substitui o valor no escopo da função/global
+    console.log(nome, nome2); // 'Amora' 'Shuri'
+}
+console.log(nome, nome2); // 'Eloisa' 'Shuri'
+
+// Exemplo de Hoisting com var
+console.log(varNaoDec); // Exibe: undefined (não dá erro de execução)
+var varNaoDec = 'var Nao Declarado';
+```
+
+# Aula 29 - Atribuição via Desestruturação (Arrays)
+
+Nesta aula, aprendemos o conceito de desestruturação (*destructuring assignment*) em arrays, facilitando a extração de dados e a atribuição para múltiplas variáveis:
+
+- **Desestruturação básica**: Permite atribuir os elementos de um array ordenadamente para variáveis individuais indicadas entre colchetes.
+- **Operador Rest (`...`)**: Pode ser utilizado para capturar os elementos restantes do array em um novo array.
+- **Ignorar Elementos**: Podemos ignorar elementos do array deixando espaços em branco separados por vírgula na desestruturação (ex: `const [um, , tres] = array`).
+- **Arrays Multidimensionais**: A sintaxe permite aninhamento para realizar a desestruturação e extração direta de valores em arrays de arrays.
+
+Exemplos de código:
+```javascript
+// Atribuição e Permutação
+let a = 'A';
+let b = 'B';
+let c = 'C';
+const abc = [b, c, a];
+[a, b, c] = abc; // a = 'B', b = 'C', c = 'A'
+console.log(a, b, c);
+
+// Extração básica e operador Rest
+const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const [primeiro, segundo, ...resto] = numeros;
+console.log(primeiro, segundo); // 1 2
+console.log(resto); // [3, 4, 5, 6, 7, 8, 9]
+
+// Pulando elementos
+const [um, , tres, , cinco] = numeros;
+console.log(um, tres, cinco); // 1 3 5
+
+// Desestruturação de Array Multidimensional
+const numeros2 = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
+const [ , [ , , seis]] = numeros2; // Pula a primeira lista, pula os dois primeiros elementos da segunda lista
+console.log(seis); // 6
 ```
