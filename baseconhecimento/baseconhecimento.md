@@ -1093,11 +1093,194 @@ Resumo das estruturas estudadas:
 - **`for...of`**: Retorna os valores de iteráveis.
 - **`forEach()`**: Percorre um array executando uma callback para cada elemento.
 
+# Aula 35 - While e Do While
+
+Nesta aula, aprendemos a utilizar `while` e `do...while` para repetir um bloco de código quando não sabemos antecipadamente quantas repetições serão necessárias:
+
+- **`while`**: Verifica a condição antes de executar o bloco. Se a condição começar falsa, o bloco não será executado nenhuma vez.
+- **`do...while`**: Executa o bloco primeiro e verifica a condição depois. Por isso, o bloco sempre será executado pelo menos uma vez.
+- **Variável de controle**: Deve ser alterada dentro do laço para que, em algum momento, a condição se torne falsa.
+- **Laço infinito**: Acontece quando a condição nunca se torna falsa. É importante garantir uma forma de encerrar a repetição.
+
+Sintaxe:
+```javascript
+while (condicao) {
+    // Código repetido
+}
+
+do {
+    // Código repetido
+} while (condicao);
+```
+
+Exemplos:
+```javascript
+let controle = 0;
+
+while (controle <= 3) {
+    console.log(controle);
+    controle++;
+}
+
+function random(min, max) {
+    const numero = Math.random() * (max - min) + min;
+    return Math.floor(numero);
+}
+
+let numeroAleatorio;
+
+do {
+    numeroAleatorio = random(1, 50);
+    console.log(numeroAleatorio);
+} while (numeroAleatorio !== 10);
+```
+
+# Aula 36 - Break e Continue
+
+Nesta aula, aprendemos a controlar a execução dos laços de repetição com `break` e `continue`:
+
+- **`continue`**: Interrompe somente a repetição atual e passa para a próxima. O código que estiver abaixo dele dentro do laço não será executado nessa repetição.
+- **`break`**: Encerra imediatamente o laço de repetição.
+- Essas palavras podem ser utilizadas em estruturas como `for`, `for...in`, `for...of`, `while` e `do...while`.
+
+Exemplo:
+```javascript
+const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+for (const numero of numeros) {
+    if (numero === 2 || numero === 5) {
+        continue; // Pula apenas os números 2 e 5
+    }
+
+    console.log(numero);
+
+    if (numero === 7) {
+        break; // Encerra o laço ao chegar no número 7
+    }
+}
+```
+
+# Aula 37 - Tratando e Lançando Erros com Try, Catch e Throw
+
+Nesta aula, aprendemos a capturar erros de execução e a lançar erros quando uma função recebe valores inválidos:
+
+- **`try`**: Contém o código que será tentado e que pode gerar um erro.
+- **`catch`**: É executado quando ocorre um erro dentro do `try`. O parâmetro do `catch` recebe o objeto de erro.
+- **`throw`**: Interrompe a execução atual e lança um valor como erro, transferindo o controle para um `catch` compatível.
+- **Objetos de erro**: `Error`, `ReferenceError` e `TypeError` são tipos de erro que podem ser criados com `new` e uma mensagem explicativa.
+- Para o usuário, normalmente é melhor apresentar uma mensagem amigável em vez de exibir diretamente os detalhes internos do erro.
+
+Exemplo:
+```javascript
+function soma(x, y) {
+    if (typeof x !== 'number' || typeof y !== 'number') {
+        throw new TypeError('x e y precisam ser números');
+    }
+
+    return x + y;
+}
+
+try {
+    console.log(soma(1, 2));
+    console.log(soma('1', '2'));
+} catch (erro) {
+    console.log('Não foi possível realizar a soma.');
+}
+```
+
+# Aula 38 - Try, Catch e Finally
+
+Nesta aula, continuamos o tratamento de erros e conhecemos o bloco `finally`:
+
+- **`finally`**: É executado após o `try` e o `catch`, independentemente de ter ocorrido um erro.
+- É útil para executar uma finalização que deve acontecer tanto em caso de sucesso quanto em caso de falha.
+- **`TypeError`**: Pode representar um valor recebido com um tipo diferente do esperado.
+- **`instanceof Date`**: Verifica se um valor é uma instância criada a partir de `Date`.
+- **`toLocaleTimeString()`**: Formata apenas o horário de uma data de acordo com uma localidade e com as opções informadas.
+
+Exemplo:
+```javascript
+function retornaHora(data) {
+    if (data && !(data instanceof Date)) {
+        throw new TypeError('Esperando uma instância de Date.');
+    }
+
+    if (!data) {
+        data = new Date();
+    }
+
+    return data.toLocaleTimeString('pt-BR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+    });
+}
+
+try {
+    console.log(retornaHora(new Date()));
+} catch (erro) {
+    console.log('Erro ao obter o horário.');
+} finally {
+    console.log('Finalizando...');
+}
+```
+
+# Aula 39 - setInterval e setTimeout
+
+Nesta aula, aprendemos a agendar a execução de funções utilizando temporizadores:
+
+- **`setInterval(funcao, tempo)`**: Executa uma função repetidamente, respeitando um intervalo de tempo.
+- **`setTimeout(funcao, tempo)`**: Executa uma função uma única vez após o tempo informado.
+- O tempo é informado em **milissegundos**. Por exemplo, `1000` milissegundos correspondem a 1 segundo.
+- Os temporizadores retornam um identificador que pode ser armazenado em uma variável.
+- **`clearInterval(identificador)`**: Encerra as repetições iniciadas por `setInterval()`.
+- As funções entregues aos temporizadores são callbacks, pois serão chamadas posteriormente por eles.
+
+Exemplo:
+```javascript
+function mostraHora() {
+    const data = new Date();
+    return data.toLocaleTimeString('pt-BR', { hour12: false });
+}
+
+const timer = setInterval(function () {
+    console.log(mostraHora());
+}, 1000);
+
+setTimeout(function () {
+    clearInterval(timer);
+}, 10000);
+```
+
 # Exercícios - Conhecimentos apresentados apenas nos exercícios
 
 Este tópico reúne exclusivamente conceitos utilizados nas atividades da pasta `curso_fullstack/exercicios`, mas que não foram explicados nos outros tópicos desta base de conhecimento.
 
 Todos os conceitos ainda não explicados que aparecerem nos exercícios atuais ou em exercícios criados futuramente deverão ser acrescentados neste tópico. Um conteúdo não deverá ser incluído aqui quando já possuir explicação em outro tópico da base.
+
+## Seleção de Vários Elementos e Manipulação de Estilos no DOM
+
+O exercício 10 utiliza recursos adicionais para selecionar vários elementos e consultar ou alterar seus estilos:
+
+- **`elemento.querySelector('seletor')`**: A busca também pode ser feita a partir de um elemento específico. Nesse caso, somente os seus descendentes são procurados.
+- **`querySelectorAll('seletor')`**: Retorna todos os elementos que correspondem ao seletor CSS informado.
+- **`NodeList`**: É a coleção retornada por `querySelectorAll()`. Ela pode ser percorrida com `for...of`.
+- **`getComputedStyle(elemento)`**: Retorna os estilos finais calculados pelo navegador para o elemento, incluindo regras vindas do CSS.
+- **`elemento.style`**: Permite ler ou alterar os estilos inline de um elemento. As propriedades CSS com hífen são escritas em camelCase no JavaScript, como `backgroundColor`.
+
+Exemplo:
+```javascript
+const paragrafos = document.querySelector('.paragrafos');
+const listaDeParagrafos = paragrafos.querySelectorAll('p');
+const estilosDoBody = getComputedStyle(document.body);
+const corDoFundo = estilosDoBody.backgroundColor;
+
+for (const paragrafo of listaDeParagrafos) {
+    paragrafo.style.backgroundColor = corDoFundo;
+    paragrafo.style.color = '#fff';
+}
+```
 
 ## Método split das Strings
 
