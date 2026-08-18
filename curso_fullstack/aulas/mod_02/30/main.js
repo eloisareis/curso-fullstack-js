@@ -23,3 +23,13 @@ console.log(r, numero, endereco);
 
 const { nome: nome1, ...resto } = pessoa; // Atribuição por desestruturação com operador rest
 console.log(nome1, resto); // resto é um objeto com as propriedades restantes de pessoa
+
+const elementos = [
+    {tag: 'p', texto: 'Frase 1'},
+    {tag: 'div', texto: 'Frase 2'},
+    {tag: 'footer', texto: 'Frase 3'},
+    {tag: 'section', texto: 'Frase 4'}
+];
+
+const [ tag, texto ] = elementos;
+console.log(tag, texto);

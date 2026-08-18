@@ -910,3 +910,520 @@ const numeros2 = [
 const [ , [ , , seis]] = numeros2; // Pula a primeira lista, pula os dois primeiros elementos da segunda lista
 console.log(seis); // 6
 ```
+
+# Aula 30 - Atribuição via Desestruturação (Objetos)
+
+Nesta aula, aprendemos a extrair propriedades de objetos e atribuí-las a variáveis com uma sintaxe mais curta:
+
+- **Desestruturação básica**: Os nomes entre chaves procuram propriedades com os mesmos nomes no objeto.
+- **Propriedade inexistente**: Quando a propriedade solicitada não existe, a variável recebe `undefined`.
+- **Renomeação**: A sintaxe `propriedade: novoNome` permite guardar o valor em uma variável com outro nome.
+- **Desestruturação aninhada**: Permite retirar valores de objetos que estão dentro de outros objetos.
+- **Operador Rest (`...`)**: Reúne em um novo objeto as propriedades que não foram extraídas anteriormente.
+
+Exemplo:
+```javascript
+const pessoa = {
+    nome: 'Eloisa',
+    sobrenome: 'Reis',
+    idade: 20,
+    endereco: {
+        rua: 'Rua A',
+        numero: 123
+    }
+};
+
+const { nome, idade, cidade } = pessoa;
+console.log(nome, idade, cidade); // Eloisa 20 undefined
+
+const { nome: primeiroNome } = pessoa;
+console.log(primeiroNome); // Eloisa
+
+const {
+    endereco: { rua, numero }
+} = pessoa;
+console.log(rua, numero); // Rua A 123
+
+const { sobrenome, ...resto } = pessoa;
+console.log(resto); // nome, idade e endereco
+```
+
+# Aula 31 - For Clássico
+
+Nesta aula, aprendemos a utilizar o laço `for` para repetir um bloco de código enquanto uma condição for verdadeira.
+
+A estrutura possui três partes:
+
+1. **Inicialização**: Executada uma vez antes da primeira repetição.
+2. **Condição**: Verificada antes de cada repetição. O laço continua enquanto ela for verdadeira.
+3. **Atualização**: Executada ao final de cada repetição, normalmente para incrementar ou decrementar o contador.
+
+Sintaxe:
+```javascript
+for (inicializacao; condicao; atualizacao) {
+    // Código repetido
+}
+```
+
+Exemplos:
+```javascript
+for (let i = 0; i <= 5; i++) {
+    console.log(`Linha ${i}`);
+}
+
+for (let i = 0; i <= 10; i++) {
+    const tipo = i % 2 === 0 ? 'par' : 'ímpar';
+    console.log(`${i} é ${tipo}`);
+}
+
+const frutas = ['Maçã', 'Banana', 'Uva', 'Pera'];
+
+for (let i = 0; i < frutas.length; i++) {
+    console.log(`Índice ${i}: ${frutas[i]}`);
+}
+```
+
+Ao percorrer um array, a condição normalmente deve ser `i < array.length`. Usar `i <= array.length` cria uma repetição a mais e tenta acessar uma posição inexistente, cujo valor será `undefined`.
+
+# Aula 32 - DOM e Criação de Elementos
+
+Nesta aula, aprendemos que o DOM (*Document Object Model*) representa o documento HTML como uma árvore de objetos que o JavaScript pode consultar e modificar:
+
+- **`document`**: Representa o documento HTML carregado.
+- **Árvore do DOM**: O documento contém o elemento `<html>`, que possui `<head>` e `<body>` como filhos. Os demais elementos formam novos níveis dessa árvore.
+- **`document.querySelector('seletor')`**: Retorna o primeiro elemento que corresponde ao seletor CSS informado ou `null` quando não encontra nenhum.
+- **`document.createElement('tag')`**: Cria um novo elemento HTML em memória. Ele ainda não aparece na página.
+- **`document.createTextNode('texto')`**: Cria um nó de texto em memória.
+- **`elementoPai.appendChild(elementoFilho)`**: Coloca um nó no final da lista de filhos de outro elemento. É nesse momento que um elemento criado pode ser inserido na árvore da página.
+
+Exemplo:
+```javascript
+const container = document.querySelector('.container');
+const div = document.createElement('div');
+const paragrafo = document.createElement('p');
+const texto = document.createTextNode('Frase criada com JavaScript');
+
+paragrafo.appendChild(texto); // O texto passa a ser filho do parágrafo
+div.appendChild(paragrafo);   // O parágrafo passa a ser filho da div
+container.appendChild(div);   // A div é inserida no elemento da página
+```
+
+Também podemos combinar arrays, objetos, desestruturação e repetição para criar vários elementos:
+
+```javascript
+const elementos = [
+    { tag: 'p', texto: 'Frase 1' },
+    { tag: 'div', texto: 'Frase 2' }
+];
+
+const div = document.createElement('div');
+
+for (let i = 0; i < elementos.length; i++) {
+    const { tag, texto } = elementos[i];
+    const elemento = document.createElement(tag);
+    const textoCriado = document.createTextNode(texto);
+
+    elemento.appendChild(textoCriado);
+    div.appendChild(elemento);
+}
+```
+
+# Aula 33 - For In
+
+Nesta aula, aprendemos a utilizar `for...in` para percorrer os índices enumeráveis de um array ou as chaves enumeráveis de um objeto:
+
+- Em **arrays**, a variável do laço recebe os índices.
+- Em **objetos**, a variável do laço recebe os nomes das propriedades.
+- A notação de colchetes, como `objeto[chave]`, permite acessar uma propriedade usando o valor guardado em uma variável.
+
+Exemplos:
+```javascript
+const frutas = ['Pera', 'Maçã', 'Uva'];
+
+for (const indice in frutas) {
+    console.log(indice);         // 0, 1, 2
+    console.log(frutas[indice]); // Pera, Maçã, Uva
+}
+
+const pessoa = {
+    nome: 'Eloisa',
+    sobrenome: 'Reis',
+    idade: 20
+};
+
+for (const chave in pessoa) {
+    console.log(chave);         // nome, sobrenome, idade
+    console.log(pessoa[chave]); // valor de cada propriedade
+}
+```
+
+Quando o objetivo for obter diretamente os valores de um array, geralmente `for...of` é mais simples.
+
+# Aula 34 - For Of e forEach
+
+Nesta aula, aprendemos outras formas de percorrer valores iteráveis, como arrays e strings:
+
+- **Iterável**: Valor que pode fornecer seus itens um de cada vez. Arrays e strings são exemplos de iteráveis.
+- **`for...of`**: Percorre diretamente os valores de um iterável, sem precisar acessar cada posição pelo índice.
+- Objetos comuns não são iteráveis diretamente com `for...of`.
+- **`forEach()`**: Método de arrays que executa uma função uma vez para cada elemento.
+- A função passada ao `forEach()` pode receber, nesta ordem, o valor atual, o índice e o array completo. Essa função é uma **callback**, pois é entregue a outro método para ser chamada por ele.
+
+Exemplos:
+```javascript
+const nomes = ['Eloisa Reis', 'Ravena'];
+
+for (const nome of nomes) {
+    console.log(nome); // Retorna cada valor
+}
+
+for (const letra of 'JavaScript') {
+    console.log(letra); // Retorna uma letra por vez
+}
+
+nomes.forEach(function (valor, indice, array) {
+    console.log(valor, indice, array);
+});
+```
+
+Resumo das estruturas estudadas:
+
+- **`for` clássico**: Oferece controle sobre inicialização, condição e atualização.
+- **`for...in`**: Retorna índices de arrays ou chaves de objetos.
+- **`for...of`**: Retorna os valores de iteráveis.
+- **`forEach()`**: Percorre um array executando uma callback para cada elemento.
+
+# Exercícios - Conhecimentos apresentados apenas nos exercícios
+
+Este tópico reúne exclusivamente conceitos utilizados nas atividades da pasta `curso_fullstack/exercicios`, mas que não foram explicados nos outros tópicos desta base de conhecimento.
+
+Todos os conceitos ainda não explicados que aparecerem nos exercícios atuais ou em exercícios criados futuramente deverão ser acrescentados neste tópico. Um conteúdo não deverá ser incluído aqui quando já possuir explicação em outro tópico da base.
+
+## Método split das Strings
+
+O método `split()` divide uma string em partes e retorna um array:
+
+- **`split(separador)`**: O separador informa em qual ponto a string será dividida.
+- **`split(' ')`**: Separa uma frase a cada espaço, gerando um array de palavras.
+- **`split('')`**: Separa todos os caracteres da string.
+- O método não modifica a string original.
+
+Exemplos:
+```javascript
+const nome = 'Eloisa de Castro Reis';
+
+const palavras = nome.split(' ');
+console.log(palavras); // ['Eloisa', 'de', 'Castro', 'Reis']
+
+const letras = nome.split('');
+console.log(letras); // ['E', 'l', 'o', 'i', 's', 'a', ...]
+```
+
+Quando um array é colocado diretamente em uma Template String, seus elementos são convertidos em texto e separados por vírgulas:
+
+```javascript
+console.log(`${nome.split(' ')}`); // Eloisa,de,Castro,Reis
+```
+
+## Conversão Booleana com Dupla Negação
+
+A dupla negação `!!` converte um valor para o tipo booleano:
+
+- O primeiro `!` converte o valor para booleano e inverte o resultado.
+- O segundo `!` inverte novamente.
+- `!!valor` produz o mesmo resultado de `Boolean(valor)`.
+
+Exemplos:
+```javascript
+console.log(!!1);         // true
+console.log(!!0);         // false
+console.log(!!'Eloisa');  // true
+console.log(!!'');        // false
+console.log(!!null);      // false
+```
+
+Quando a expressão já é uma comparação, ela já retorna `true` ou `false` e não precisa de `!!`:
+
+```javascript
+const numero = 10;
+const inteiro = Math.round(numero) === numero;
+```
+
+## Acessos Adicionais ao DOM e Seleção por ID
+
+Além dos recursos apresentados na Aula 32, os exercícios utilizam estas formas de acesso:
+
+- **`document.body`**: Representa diretamente o elemento `<body>` da página.
+- **`window.document`**: Forma completa de acessar o documento. No navegador, normalmente utilizamos apenas `document`.
+- **`document.getElementById('id')`**: Procura um elemento pelo atributo `id` e retorna `null` quando não o encontra.
+
+Exemplo:
+```javascript
+const titulo = document.getElementById('titulo');
+console.log(document.body);
+```
+
+O atributo `id` deve ser único na página para identificar corretamente um elemento.
+
+## innerHTML e value
+
+Essas propriedades permitem ler ou alterar dados dos elementos:
+
+- **`innerHTML`**: Lê ou altera o conteúdo HTML interno, interpretando tags.
+- **`value`**: Obtém ou altera o valor de campos de formulário, como `<input>`.
+- **`innerHTML +=`**: Recria o conteúdo existente acrescentando o novo conteúdo ao final.
+
+Exemplos:
+```javascript
+const resultado = document.querySelector('.resultado');
+
+resultado.innerHTML = '<strong>Resultado</strong>';
+resultado.innerHTML += '<p>Novo resultado</p>';
+
+const nome = document.querySelector('.nome');
+console.log(nome.value);
+```
+
+Valores obtidos de elementos `<input>` são strings. Para utilizá-los em cálculos, é necessário convertê-los:
+
+```javascript
+const campoPeso = document.querySelector('.peso');
+const peso = Number(campoPeso.value);
+```
+
+Como `innerHTML` interpreta tags, ele não deve receber conteúdo desconhecido sem validação.
+
+## Formulários HTML
+
+Formulários agrupam campos que recebem informações do usuário:
+
+- **`<form>`**: Representa o formulário.
+- **`<input>`**: Cria um campo de entrada.
+- **`<label>`**: Cria uma descrição para um campo.
+- **`<button type="submit">`**: Envia o formulário.
+- **`action`**: Indica para onde os dados serão enviados.
+- **`method="get"`**: Envia os dados pela URL.
+- **`method="post"`**: Envia os dados no corpo da requisição.
+- **`class`**: Pode ser reutilizada em vários elementos e serve para seleção no CSS e no JavaScript.
+- **`id`**: Identifica um único elemento e também pode ligá-lo a um `<label>` por meio do atributo `for`.
+
+Exemplo:
+```html
+<form class="form" action="/cadastro" method="post">
+    <label for="nome">Nome</label>
+    <input type="text" id="nome" name="nome">
+    <button type="submit">Enviar</button>
+</form>
+```
+
+## Eventos, addEventListener e preventDefault
+
+Eventos representam ações que acontecem na página, como cliques, digitação ou envio de um formulário:
+
+- **`addEventListener()`**: Registra uma função que será executada quando o evento ocorrer.
+- **`submit`**: Evento disparado quando um formulário é enviado.
+- **Objeto `event`**: Contém informações sobre o evento ocorrido.
+- **`event.preventDefault()`**: Impede o comportamento padrão do navegador. Em um formulário, evita o envio imediato e o recarregamento da página.
+
+Sintaxe:
+```javascript
+elemento.addEventListener('nomeDoEvento', funcao);
+```
+
+Exemplo:
+```javascript
+const form = document.querySelector('.form');
+
+function recebeEvento(event) {
+    event.preventDefault();
+    console.log('Formulário enviado');
+}
+
+form.addEventListener('submit', recebeEvento);
+```
+
+## Escopo Léxico e Closure
+
+Uma função interna pode acessar variáveis declaradas na função externa. Esse comportamento é chamado de **escopo léxico**:
+
+```javascript
+function externa() {
+    const nome = 'Eloisa';
+
+    function interna() {
+        console.log(nome);
+    }
+
+    interna();
+}
+
+externa();
+```
+
+Uma **closure** acontece quando uma função mantém acesso ao escopo em que foi criada, mesmo sendo executada posteriormente:
+
+```javascript
+function configurarCadastro() {
+    const pessoas = [];
+
+    function adicionarPessoa(nome) {
+        pessoas.push({ nome });
+        console.log(pessoas);
+    }
+
+    return adicionarPessoa;
+}
+
+const adicionar = configurarCadastro();
+adicionar('Eloisa');
+adicionar('Ravena');
+```
+
+Em um evento de formulário, a callback mantém acesso ao formulário, ao resultado e ao array declarados na função externa. Assim, o array pode continuar armazenando pessoas entre diferentes envios.
+
+## Chamada de Função e IIFE
+
+Declarar uma função e chamá-la na linha seguinte é uma chamada normal:
+
+```javascript
+function escopo() {
+    console.log('Executando');
+}
+
+escopo();
+```
+
+Uma IIFE (*Immediately Invoked Function Expression*) é uma expressão de função criada e executada imediatamente:
+
+```javascript
+(function () {
+    console.log('Executada imediatamente');
+})();
+```
+
+Também pode ser escrita como Arrow Function:
+
+```javascript
+(() => {
+    console.log('Executada imediatamente');
+})();
+```
+
+## Estrutura Básica do HTML Utilizado
+
+As páginas dos exercícios utilizam os seguintes elementos e configurações:
+
+- **`<!DOCTYPE html>`**: Informa que o documento usa HTML5.
+- **`<html lang="pt-br">`**: Elemento principal e idioma da página.
+- **`<head>`**: Guarda configurações, metadados, título e importações.
+- **`<body>`**: Guarda o conteúdo visível da página.
+- **`<meta charset="UTF-8">`**: Permite utilizar acentos e caracteres especiais.
+- **Viewport**: Ajusta a exibição da página em dispositivos móveis.
+- **`<link rel="stylesheet">`**: Importa um arquivo CSS externo.
+- **`href`**: Indica o endereço de um recurso, como um arquivo CSS.
+
+Exemplo:
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Minha página</title>
+</head>
+<body>
+    <section class="container">
+        <h1 id="titulo">Título</h1>
+    </section>
+</body>
+</html>
+```
+
+## Fundamentos do CSS Utilizado
+
+Os arquivos CSS dos exercícios utilizam seletores, variáveis, pseudo-classes e propriedades de estilização:
+
+- **Seletor de elemento**: Seleciona uma tag, como `body` ou `form`.
+- **Seletor de classe**: Começa com ponto, como `.container`.
+- **Seletor universal `*`**: Seleciona todos os elementos.
+- **Seletores agrupados**: Usam vírgula para aplicar as mesmas regras a vários seletores.
+- **`elemento descendente`**: Seleciona elementos que estão dentro de outro elemento, como `form input`.
+- **`:hover`**: Aplica estilos quando o mouse está sobre o elemento.
+- **`:focus`**: Aplica estilos quando o elemento recebe foco.
+- **`@import`**: Importa outro arquivo CSS, como uma fonte externa.
+- **`:root`**: Representa o elemento raiz da página e é utilizado para declarar variáveis CSS globais.
+- **Variáveis CSS**: São declaradas com `--nome` e acessadas usando `var(--nome)`.
+
+Exemplo:
+```css
+:root {
+    --primary-color: rgb(17, 86, 102);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--primary-color);
+}
+
+.container {
+    max-width: 640px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+form input:focus {
+    outline: 1px solid var(--primary-color);
+}
+
+form button:hover {
+    background: black;
+}
+```
+
+Propriedades utilizadas nos exercícios:
+
+- **`margin`**: Espaço externo do elemento.
+- **`padding`**: Espaço interno do elemento.
+- **`width` e `height`**: Largura e altura.
+- **`max-width`**: Limita a largura máxima.
+- **`background`**: Define o fundo.
+- **`color`**: Define a cor do texto.
+- **`border`**: Define a borda.
+- **`border-radius`**: Arredonda os cantos.
+- **`display: block`**: Faz o elemento ocupar uma linha própria.
+- **`box-sizing: border-box`**: Inclui bordas e espaçamentos internos no tamanho definido.
+- **`font-family`**: Define a família da fonte.
+- **`font-size`**: Define o tamanho da fonte.
+- **`font-weight`**: Define a espessura da fonte.
+- **`line-height`**: Define a altura da linha.
+- **`cursor: pointer`**: Exibe o cursor de clique.
+
+## Formatação Local de Datas com toLocaleString
+
+O método `toLocaleString()` converte uma data para texto seguindo as regras de um idioma e de uma região:
+
+- **`'pt-BR'`**: Solicita a formatação utilizada no Brasil.
+- O segundo argumento é um objeto com as opções de formatação.
+- `dateStyle` define o nível de detalhes da data.
+- `timeStyle` define o nível de detalhes do horário.
+
+Exemplo:
+```javascript
+const data = new Date();
+
+const opcoes = {
+    dateStyle: 'full',
+    timeStyle: 'short'
+};
+
+console.log(data.toLocaleString('pt-BR', opcoes));
+// Exemplo: segunda-feira, 17 de agosto de 2026 às 14:30
+```
+
+Esse método pode substituir a criação manual dos nomes dos dias da semana e dos meses com vários blocos `switch/case`.
