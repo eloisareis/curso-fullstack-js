@@ -1253,19 +1253,156 @@ setTimeout(function () {
 }, 10000);
 ```
 
+# Aula 40 - Criando uma Lista de Tarefas
+
+Nesta aula, reunimos eventos, manipulação do DOM, arrays e laços de repetição para criar uma lista de tarefas que permanece salva no navegador.
+
+## Eventos de Teclado e Foco
+
+Além do evento de clique, podemos observar as teclas pressionadas em um campo:
+
+- **`keypress`**: Evento disparado quando uma tecla que produz um caractere é pressionada. É um evento antigo; em projetos novos, normalmente utilizamos `keydown`.
+- **`event.keyCode`**: Informa o código numérico da tecla. O código `13` representa a tecla Enter, mas essa propriedade também é antiga.
+- **`event.key`**: Forma atual e mais legível de identificar a tecla, como `'Enter'`.
+- **`elemento.focus()`**: Coloca o foco no elemento. Em um `<input>`, faz o cursor voltar para o campo.
+
+Exemplo com a forma atual:
+```javascript
+const input = document.querySelector('.inputNew');
+
+input.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter' && input.value) {
+        criaTarefa(input.value);
+        input.value = '';
+        input.focus();
+    }
+});
+```
+
+## Novas Formas de Manipular Elementos do DOM
+
+A lista de tarefas utiliza propriedades e métodos para criar, alterar e remover elementos:
+
+- **`innerText`**: Lê ou altera o texto visível de um elemento sem interpretar tags HTML.
+- **`setAttribute(nome, valor)`**: Cria ou altera um atributo HTML, como `class`, `id` ou `title`.
+- **`classList.contains('classe')`**: Retorna `true` quando o elemento possui a classe informada.
+- **`parentElement`**: Retorna o elemento pai de outro elemento.
+- **`remove()`**: Remove o próprio elemento do DOM.
+
+Os métodos `document.createElement()` e `appendChild()`, apresentados na Aula 32, são utilizados novamente para criar os itens e os botões da lista.
+
+Exemplo:
+```javascript
+function criaBotaoApagar(li) {
+    const botao = document.createElement('button');
+    botao.innerText = 'Apagar';
+    botao.setAttribute('class', 'apagar');
+    li.appendChild(botao);
+}
+```
+
+## Objeto do Evento, target e Delegação de Eventos
+
+O objeto recebido pela função de evento guarda informações sobre a ação realizada:
+
+- **`event.target`**: Indica o elemento exato em que a ação aconteceu.
+- Eventos como `click` propagam-se dos elementos internos para seus elementos pais. Esse comportamento é chamado de **propagação** ou *event bubbling*.
+- Na **delegação de eventos**, um único ouvinte é adicionado a um elemento pai, como `document`, e `event.target` identifica qual elemento interno foi acionado.
+
+Essa técnica permite tratar inclusive botões criados depois que a página já foi carregada:
+```javascript
+document.addEventListener('click', function (event) {
+    const elemento = event.target;
+
+    if (elemento.classList.contains('apagar')) {
+        elemento.parentElement.remove();
+    }
+});
+```
+
+## querySelectorAll e NodeList
+
+Quando precisamos selecionar vários elementos, utilizamos `querySelectorAll()`:
+
+- **`document.querySelectorAll('seletor')`**: Procura todos os elementos do documento que correspondem ao seletor.
+- **`elemento.querySelectorAll('seletor')`**: Limita a busca aos descendentes do elemento informado.
+- O resultado é uma **`NodeList`**, coleção que pode ser percorrida com estruturas como `for...of`.
+
+Exemplo:
+```javascript
+const lista = document.querySelector('.tarefas');
+const itens = lista.querySelectorAll('li');
+
+for (const item of itens) {
+    console.log(item.innerText);
+}
+```
+
+## trim e replace na Preparação do Texto
+
+Antes de salvar uma tarefa, podemos preparar o texto com métodos de string:
+
+- **`replace('textoAntigo', 'textoNovo')`**: Substitui a primeira ocorrência encontrada. Esse método já foi apresentado na Aula 11.
+- **`trim()`**: Retorna uma nova string sem espaços em branco no início e no final. A string original não é modificada.
+
+Exemplo:
+```javascript
+const textoCompleto = ' Estudar JavaScript Apagar ';
+const tarefa = textoCompleto.replace('Apagar', '').trim();
+
+console.log(tarefa); // Estudar JavaScript
+```
+
+## JSON
+
+JSON (*JavaScript Object Notation*) é um formato de texto utilizado para representar dados estruturados. Na lista de tarefas, ele permite converter o array em texto antes de armazená-lo e reconstruir o array quando os dados forem lidos:
+
+- **`JSON.stringify(valor)`**: Converte um valor JavaScript, como um array ou objeto, em uma string JSON.
+- **`JSON.parse(texto)`**: Converte uma string JSON válida novamente em um valor JavaScript.
+
+Exemplo:
+```javascript
+const tarefas = ['Estudar', 'Praticar'];
+const tarefasJSON = JSON.stringify(tarefas);
+
+console.log(tarefasJSON); // ["Estudar","Praticar"]
+console.log(JSON.parse(tarefasJSON)); // ['Estudar', 'Praticar']
+```
+
+## localStorage
+
+O `localStorage` permite guardar dados no navegador associados ao endereço da página. Os dados continuam disponíveis após atualizar a página ou fechar e abrir novamente o navegador:
+
+- **`localStorage.setItem(chave, valor)`**: Salva ou substitui um valor. O armazenamento trabalha com strings.
+- **`localStorage.getItem(chave)`**: Recupera o valor salvo ou retorna `null` quando a chave não existe.
+- **`localStorage.removeItem(chave)`**: Remove um item específico.
+- **`localStorage.clear()`**: Remove todos os itens do `localStorage` associados à página.
+
+Arrays e objetos devem ser convertidos com `JSON.stringify()` ao salvar e com `JSON.parse()` ao recuperar. É importante prever a primeira execução, quando ainda não existem dados salvos:
+
+```javascript
+function salvarTarefas(tarefas) {
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+}
+
+function carregarTarefas() {
+    const tarefasJSON = localStorage.getItem('tarefas');
+    return tarefasJSON ? JSON.parse(tarefasJSON) : [];
+}
+
+const tarefasSalvas = carregarTarefas();
+```
+
 # Exercícios - Conhecimentos apresentados apenas nos exercícios
 
 Este tópico reúne exclusivamente conceitos utilizados nas atividades da pasta `curso_fullstack/exercicios`, mas que não foram explicados nos outros tópicos desta base de conhecimento.
 
 Todos os conceitos ainda não explicados que aparecerem nos exercícios atuais ou em exercícios criados futuramente deverão ser acrescentados neste tópico. Um conteúdo não deverá ser incluído aqui quando já possuir explicação em outro tópico da base.
 
-## Seleção de Vários Elementos e Manipulação de Estilos no DOM
+## Manipulação de Estilos no DOM
 
-O exercício 10 utiliza recursos adicionais para selecionar vários elementos e consultar ou alterar seus estilos:
+O exercício 10 utiliza recursos adicionais para consultar ou alterar os estilos dos elementos. A seleção com `querySelectorAll()` e o tipo `NodeList`, antes exclusivos desse exercício, passaram a fazer parte da Aula 40:
 
-- **`elemento.querySelector('seletor')`**: A busca também pode ser feita a partir de um elemento específico. Nesse caso, somente os seus descendentes são procurados.
-- **`querySelectorAll('seletor')`**: Retorna todos os elementos que correspondem ao seletor CSS informado.
-- **`NodeList`**: É a coleção retornada por `querySelectorAll()`. Ela pode ser percorrida com `for...of`.
 - **`getComputedStyle(elemento)`**: Retorna os estilos finais calculados pelo navegador para o elemento, incluindo regras vindas do CSS.
 - **`elemento.style`**: Permite ler ou alterar os estilos inline de um elemento. As propriedades CSS com hífen são escritas em camelCase no JavaScript, como `backgroundColor`.
 
@@ -1610,3 +1747,50 @@ console.log(data.toLocaleString('pt-BR', opcoes));
 ```
 
 Esse método pode substituir a criação manual dos nomes dos dias da semana e dos meses com vários blocos `switch/case`.
+
+## Adição e Remoção de Classes com classList
+
+O exercício 14 utiliza `classList` para alterar a aparência do relógio sem modificar diretamente cada propriedade CSS:
+
+- **`elemento.classList.add('classe')`**: Adiciona uma classe ao elemento.
+- **`elemento.classList.remove('classe')`**: Remove uma classe do elemento.
+- A classe pode concentrar várias regras no CSS, mantendo a estilização separada do JavaScript.
+- O método `classList.contains()`, usado para verificar a existência de uma classe, é explicado na Aula 40.
+
+Exemplo:
+```css
+.pausado {
+    color: red;
+}
+```
+
+```javascript
+const relogio = document.querySelector('.relogio');
+
+relogio.classList.add('pausado');
+relogio.classList.remove('pausado');
+```
+
+## Opção timeZone na Formatação de Horas
+
+O exercício 14 também utiliza a opção `timeZone` de `toLocaleTimeString()`:
+
+- **`timeZone`**: Define o fuso horário utilizado na formatação da data.
+- Valores como `'UTC'` ou `'GMT'` evitam que o fuso horário local desloque a quantidade de horas exibida.
+- No exercício, um número de segundos é multiplicado por `1000` porque o construtor de `Date` recebe o timestamp em milissegundos.
+
+Exemplo:
+```javascript
+function criaHoraDosSegundos(segundos) {
+    const data = new Date(segundos * 1000);
+
+    return data.toLocaleTimeString('pt-BR', {
+        hour12: false,
+        timeZone: 'UTC'
+    });
+}
+
+console.log(criaHoraDosSegundos(65)); // 00:01:05
+```
+
+Nesse caso, o objeto `Date` está sendo utilizado apenas como recurso de formatação para uma duração curta, e não para representar uma data real do calendário.

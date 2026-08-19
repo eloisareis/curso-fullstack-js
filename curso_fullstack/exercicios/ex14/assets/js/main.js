@@ -3,25 +3,38 @@ const iniciar = document.querySelector('.iniciar');
 const pausar = document.querySelector('.pausar');
 const zerar = document.querySelector('.zerar');
 
-function mostraHora() {
-    let data = new Date(0, 0, 0);
-
+function horaSegundos(seg) {
+    let data = new Date(seg * 1000);
     return data.toLocaleTimeString('pt-BR', {
-        hour12: false
+        hour12: false,
+        timeZone: 'GMT'
     });
 }
 
-iniciar.addEventListener('click', function(event) {
-    const timer = setInterval(function() {
-        relogio.innerHTML = mostraHora();
+let seg = 0;
+let timer;
+
+function iniciaRelogio() {
+    timer = setInterval(function() {
+        seg++;
+        relogio.innerHTML = horaSegundos(seg);
     }, 1000);
-    console.log(timer);
+}
+
+iniciar.addEventListener('click', function(event) {
+    relogio.classList.remove('pausado');
+    clearInterval(timer);
+    iniciaRelogio();
 });
 
 pausar.addEventListener('click', function(event) {
-    alert('Cliquei pausar');
+    relogio.classList.add('pausado');
+    clearInterval(timer);
 });
 
 zerar.addEventListener('click', function(event) {
-    alert('Cliquei zerar');
+    relogio.classList.add('pausado');
+    clearInterval(timer);
+    relogio.innerHTML = '00:00:00';
+    seg = 0;
 });
