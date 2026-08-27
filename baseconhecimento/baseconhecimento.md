@@ -6,7 +6,7 @@ Nesta aula, foram abordados os seguintes tópicos:
 - **VS Code e Code Runner**: Configuração do VS Code com a extensão Code Runner para facilitar a execução de scripts JavaScript, servindo como ponte entre o editor e o Node.js.
 - **Primeiro Código**: Execução de um "Hello World" simples:
   ```javascript
-  console.log('Hello Word!');
+  console.log('Hello Word!'); // Hello Word!
   ```
 - **Execução via Terminal**: Exemplo de como executar o arquivo via terminal usando o comando 
     ```bash
@@ -25,11 +25,11 @@ Nesta aula, o foco foi o uso do `console.log` e tipos de dados básicos:
 
 Exemplos de código:
 ```javascript
-console.log('Hello Word!'); // Aspas simples
-console.log("Hello Word!"); // Aspas duplas
-console.log("Eloisa 'Reis' linda"); // Aspas duplas com aspas simples dentro
-console.log(`'Eloisa' "Reis"`); // Crase permitindo ambas as aspas
-console.log(10, 5.5, 'Eloisa Reis'); // Números e texto
+console.log('Hello Word!'); // Hello Word!
+console.log("Hello Word!"); // Hello Word!
+console.log("Eloisa 'Reis' linda"); // Eloisa 'Reis' linda
+console.log(`'Eloisa' "Reis"`); // 'Eloisa' "Reis"
+console.log(10, 5.5, 'Eloisa Reis'); // 10 5.5 Eloisa Reis
 ```
 
 # Aula 03 - Comentários de Código
@@ -103,6 +103,11 @@ let nome = 'Eloisa'; // Declaração com valor
 let idade; // Declaração sem valor (undefined)
 idade = 25; // Atribuição posterior
 // let nome = 'Outro'; // Erro: não pode redeclarar
+
+console.log(nome); // Eloisa
+console.log(idade); // 25
+console.log(nome + ' tem ' + idade + ' anos.'); // Eloisa tem 25 anos.
+console.log(`${nome} tem ${idade} anos.`); // Eloisa tem 25 anos.
 ```
 
 # Aula 06 - Constantes com const
@@ -127,8 +132,8 @@ Nesta aula, aprendemos sobre o uso de constantes (`const`) em JavaScript:
 Exemplos:
 ```javascript
 const nome = 'Eloisa';
-console.log(nome);
-console.log(typeof(nome)); // Exibe o tipo da constante (ex: string)
+console.log(nome); // Eloisa
+console.log(typeof nome); // string
 // nome = 'Outro'; // Erro: Assignment to constant variable.
 // const idade; // Erro: Missing initializer in const declaration
 ```
@@ -186,6 +191,12 @@ let sobrenomePessoa = null; // null
 // Boolean
 const verdade = true;
 const falso = false;
+
+console.log(typeof nome);       // string
+console.log(typeof n1);         // number
+console.log(nomePessoa);        // undefined
+console.log(sobrenomePessoa);   // null
+console.log(typeof verdade);    // boolean
 ```
 
 # Aula 09 - Operadores Aritméticos, de Atribuição e Incremento
@@ -230,6 +241,9 @@ const n2 = 4;
 
 console.log(n1 + n2);      // 13 (Soma)
 console.log('9' + n2);     // '94' (Concatenação)
+console.log(n1 - n2);      // 5 (Subtração)
+console.log(n1 * n2);      // 36 (Multiplicação)
+console.log(n1 / n2);      // 2.25 (Divisão)
 console.log(n2 ** 2);      // 16 (Potenciação)
 console.log(n1 % n2);      // 1 (Resto de 9 dividido por 4)
 
@@ -238,14 +252,31 @@ let i = 0;
 console.log(i++); // 0 (Mostra, depois incrementa)
 console.log(++i); // 2 (Incrementa agora para 2, depois mostra)
 
+let j = 2;
+console.log(j--); // 2 (Mostra, depois decrementa para 1)
+console.log(--j); // 0 (Decrementa novamente e depois mostra)
+
 // Atribuição
 let d = 10;
 d += 5; // d = d + 5; (Agora d vale 15)
+console.log(d); // 15
+d -= 3;
+console.log(d); // 12
+d *= 2;
+console.log(d); // 24
+d /= 4;
+console.log(d); // 6
 
 // Conversão
 const numStr = "5";
 const numInt = parseInt(numStr);
 console.log(typeof numInt); // 'number'
+
+const numDecimal = parseFloat('5.75');
+console.log(numDecimal); // 5.75
+
+const numConvertido = Number('10.5');
+console.log(numConvertido); // 10.5
 ```
 
 # Aula 10 - Alert, Confirm e Prompt
@@ -263,7 +294,8 @@ Nesta aula, aprendemos sobre três métodos do objeto `window` utilizados para i
 Exemplos:
 ```javascript
 // Alert
-alert('Bem-vindo ao sistema!');
+const retornoAlerta = alert('Bem-vindo ao sistema!'); // Exibe a caixa de alerta
+console.log(retornoAlerta); // undefined
 
 // Confirm
 const desejaApagar = confirm('Tem certeza que deseja apagar?');
@@ -312,8 +344,8 @@ Nesta aula, aprofundamos o conhecimento sobre manipulação de strings em JavaSc
 Exemplos:
 ```javascript
 // Escape de caracteres
-console.log("Um \"texto\"");
-console.log("Um \\texto");
+console.log("Um \"texto\""); // Um "texto"
+console.log("Um \\texto");   // Um \texto
 
 // Indexação
 let strg = 'Eloisa Reis';
@@ -321,26 +353,27 @@ console.log(strg[7]);        // 'R'
 console.log(strg.charAt(7)); // 'R'
 
 // Concatenação
-console.log(strg.concat(" a mais linda."));
-console.log(`${strg} a mais linda.`);
+console.log(strg.concat(" a mais linda.")); // Eloisa Reis a mais linda.
+console.log(`${strg} a mais linda.`);        // Eloisa Reis a mais linda.
 
 // Busca
 console.log(strg.indexOf('reis')); // -1 (Case sensitive)
-console.log(strg.indexOf('i', 7)); // Busca 'i' a partir do índice 7
-console.log(strg.lastIndexOf('E'));
-console.log(strg.search(/R/)); 
+console.log(strg.indexOf('i', 7)); // 9 (busca a partir do índice 7)
+console.log(strg.lastIndexOf('E')); // 0
+console.log(strg.search(/R/)); // 7
+console.log(strg.match(/[a-z]/g)); // ['l', 'o', 'i', 's', 'a', 'e', 'i', 's']
 
 // Substituição
-console.log(strg.replace('Eloisa', 'Ravena')); 
+console.log(strg.replace('Eloisa', 'Ravena')); // Ravena Reis
 
 // Tamanho e Fatiamento
-console.log(strg.length);
+console.log(strg.length);       // 11
 console.log(strg.slice(7, 11)); // 'Reis'
 console.log(strg.slice(-4));    // 'Reis' (pega os 4 últimos)
 
 // Maiúsculas e Minúsculas
-console.log(strg.toUpperCase());
-console.log(strg.toLowerCase());
+console.log(strg.toUpperCase()); // ELOISA REIS
+console.log(strg.toLowerCase()); // eloisa reis
 ```
 
 # Aula 12 - Mais sobre Numbers
@@ -360,14 +393,35 @@ Nesta aula, aprendemos algumas funções úteis para manipulação de números e
 
 - **Imprecisão com Ponto Flutuante (IEEE 754-2008)**:
     - Cálculos com decimais podem ter pequenas imprecisões (ex: `0.7 + 0.1` resulta em `0.7999999999999999`).
-    - **Solução 1**: Usar `parseFloat()` e `toFixed()`:
-        ```javascript
-        num = parseFloat(num.toFixed(2));
-        ```
-    - **Solução 2**: Matemática (multiplicar e dividir por 100):
-        ```javascript
-        num = ((num1 * 100) + (num2 * 100)) / 100;
-        ```
+    - **Solução 1**: Usar `toFixed()` para arredondar e `parseFloat()` para converter o resultado novamente em número.
+    - **Solução 2**: Realizar a conta com números inteiros, multiplicando os valores antes da operação e dividindo o resultado ao final.
+
+Exemplos:
+```javascript
+const numero = 10.578;
+
+console.log(numero.toString()); // '10.578' (string)
+console.log((10).toString(2));  // '1010' (representação binária)
+console.log(numero.toFixed(2)); // '10.58' (string)
+
+console.log(Number.isInteger(numero)); // false
+console.log(Number.isInteger(10));     // true
+
+const valorInvalido = Number('texto');
+console.log(valorInvalido);               // NaN
+console.log(Number.isNaN(valorInvalido)); // true
+
+let resultado = 0.7 + 0.1;
+console.log(resultado); // 0.7999999999999999
+
+// Solução 1: arredondar a representação e convertê-la novamente para number
+resultado = parseFloat(resultado.toFixed(2));
+console.log(resultado); // 0.8
+
+// Solução 2: realizar a conta com números inteiros
+const resultadoCorrigido = ((0.7 * 100) + (0.1 * 100)) / 100;
+console.log(resultadoCorrigido); // 0.8
+```
 
 # Aula 13 - Objeto Math
 
@@ -386,9 +440,9 @@ Nesta aula, conhecemos o objeto global `Math`, que possui métodos e propriedade
 Exemplos:
 ```javascript
 let n1 = 9.54578;
-// let n2 = Math.floor(n1); // 9
-// let n3 = Math.ceil(n1);  // 10
-// let n4 = Math.round(n1); // 10
+console.log(Math.floor(n1)); // 9
+console.log(Math.ceil(n1));  // 10
+console.log(Math.round(n1)); // 10
 
 console.log(Math.max(1, 2, 3, 4, -30, -50, 1500, 9, 8, 7, 6)); // 1500
 console.log(Math.min(1, 2, 3, 4, -30, -50, 1500, 9, 8, 7, 6)); // -50
@@ -420,22 +474,31 @@ Exemplos:
 ```javascript
 // Criação
 const amigos = ['Eloisa', 'Pedro', 'Ricardo', 'Amanda'];
+console.log(amigos.length); // 4
 
 // Acesso e Edição
 console.log(amigos[0]); // 'Eloisa'
 amigos[1] = 'Pedro Augusto';
+console.log(amigos[1]); // 'Pedro Augusto'
 
 // Adição
 amigos.push('Ciclano');    // Adiciona no fim
 amigos.unshift('Fulano');  // Adiciona no início
+console.log(amigos); // ['Fulano', 'Eloisa', 'Pedro Augusto', 'Ricardo', 'Amanda', 'Ciclano']
 
 // Remoção
-amigos.pop();   // Remove do fim
-amigos.shift(); // Remove do início
-// delete amigos[3]; // Remove valor, mantém buraco
+const ultimoRemovido = amigos.pop();
+console.log(ultimoRemovido); // 'Ciclano'
+
+const primeiroRemovido = amigos.shift();
+console.log(primeiroRemovido); // 'Fulano'
 
 // Fatiamento
-console.log(amigos.slice(0, 3)); // Pega os 3 primeiros
+console.log(amigos.slice(0, 3)); // ['Eloisa', 'Pedro Augusto', 'Ricardo']
+
+// Exclusão sem reorganizar os índices
+delete amigos[3];
+console.log(amigos); // ['Eloisa', 'Pedro Augusto', 'Ricardo', <1 empty item>]
 
 // Verificação
 console.log(typeof amigos); // 'object'
@@ -485,9 +548,10 @@ Exemplos:
 ```javascript
 // Função Clássica sem retorno
 function saudacao(nome) {
-    console.log(`Boa tarde ${nome}`);
+    console.log(`Boa tarde ${nome}`); // Ex.: Boa tarde Eloisa
 }
-saudacao('Eloisa'); // Executa a ação, mas o retorno é undefined
+const retornoSaudacao = saudacao('Eloisa'); // Boa tarde Eloisa
+console.log(retornoSaudacao); // undefined
 
 // Função com retorno
 function soma(a, b) {
@@ -549,7 +613,7 @@ function criarPessoa(nome, sobrenome, idade, profissao) {
     };
 }
 const pessoa1 = criarPessoa('Eloisa', 'Reis', 20, 'Programadora');
-console.log(pessoa1);
+console.log(pessoa1); // { nome: 'Eloisa', sobrenome: 'Reis', idade: 20, profissao: 'Programadora' }
 
 // Métodos e a palavra-chave `this`
 const pessoa2 = {
@@ -559,7 +623,7 @@ const pessoa2 = {
 
     olaPessoa() {
         // Acessando propriedades do próprio objeto com this
-        console.log(`Olá meu nome é ${this.nome} ${this.sobrenome} e tenho ${this.idade} anos de idade.`);
+        console.log(`Olá meu nome é ${this.nome} ${this.sobrenome} e tenho ${this.idade} anos de idade.`); // Ex.: ...tenho 20 anos...
     },
 
     incrementaIdade() {
@@ -567,9 +631,9 @@ const pessoa2 = {
     }
 };
 
-pessoa2.olaPessoa();
-pessoa2.incrementaIdade();
-pessoa2.olaPessoa();
+pessoa2.olaPessoa(); // Olá meu nome é Eloisa Reis e tenho 20 anos de idade.
+pessoa2.incrementaIdade(); // A idade passa de 20 para 21
+pessoa2.olaPessoa(); // Olá meu nome é Eloisa Reis e tenho 21 anos de idade.
 ```
 
 # Aula 19 - Valores primitivos e valores por referência
@@ -678,13 +742,13 @@ Exemplos:
 const a = true;
 const b = false;
 const resultadoAnd = a && b; // Curto-circuito: retorna false porque "b" é false
-console.log(resultadoAnd);
+console.log(resultadoAnd); // false
 
 // Exemplo com || (OR)
 const c = true;
 const d = false;
 const resultadoOr = c || d; // Curto-circuito: retorna true logo no "c" e ignora o resto
-console.log(resultadoOr);
+console.log(resultadoOr); // true
 ```
 
 # Aula 23 - Estruturas Condicionais (if, else if, else)
@@ -700,11 +764,11 @@ Exemplos de código:
 const hora = 18;   
 
 if (hora < 12) {
-    console.log("Bom dia!");
+    console.log("Bom dia!"); // Não é executado neste exemplo
 } else if (hora >= 12 && hora < 18) {
-    console.log("Boa tarde!");
+    console.log("Boa tarde!"); // Não é executado neste exemplo
 } else {
-    console.log("Boa noite!");
+    console.log("Boa noite!"); // Boa noite!
 }
 ```
 
@@ -721,20 +785,20 @@ const numero = 10;
 
 // Exemplo simples com if e else
 if (numero >= 0 && numero <= 5) {
-    console.log("O número está entre 0 e 5.");
+    console.log("O número está entre 0 e 5."); // Não é executado neste exemplo
 } else {
     console.log("O número não está entre 0 e 5."); // Executado caso o if seja falso
 }
 
 // Exemplo com múltiplos else if
 if (numero >= 0 && numero <= 5) {
-    console.log("O número está entre 0 e 5.");
+    console.log("O número está entre 0 e 5."); // Não é executado neste exemplo
 } else if (numero >= 6 && numero <= 8) {
-    console.log("O número está entre 6 e 8.");
+    console.log("O número está entre 6 e 8."); // Não é executado neste exemplo
 } else if (numero >= 9 && numero <= 11) {
     console.log("O número está entre 9 e 11."); // O primeiro bloco verdadeiro executa e para a cadeia
 } else {
-    console.log("O numero não está entre 0 e 11.");
+    console.log("O numero não está entre 0 e 11."); // Não é executado neste exemplo
 }
 ```
 
@@ -777,22 +841,25 @@ Métodos úteis:
 
 Exemplos de código:
 ```javascript
+const agora = new Date();
+console.log(agora); // Ex.: Wed Aug 19 2026 14:30:00 GMT-0300 (depende do momento atual)
+
 // Cria uma data específica: 28/02/2019 às 14:30:27
 const data = new Date(2019, 1, 28, 14, 30, 27); 
-console.log(data.toString()); 
+console.log(data.toString()); // Ex.: Thu Feb 28 2019 14:30:27 GMT-0300
 
-console.log('dia', data.getDate());
-console.log('ano', data.getFullYear());
-console.log('mes', data.getMonth() + 1); // Soma 1 para ajustar
-console.log('hora', data.getHours());
-console.log('minuto', data.getMinutes());
-console.log('segundo', data.getSeconds());
-console.log('milissegundo', data.getMilliseconds());
+console.log('dia', data.getDate()); // dia 28
+console.log('ano', data.getFullYear()); // ano 2019
+console.log('mes', data.getMonth() + 1); // mes 2
+console.log('hora', data.getHours()); // hora 14
+console.log('minuto', data.getMinutes()); // minuto 30
+console.log('segundo', data.getSeconds()); // segundo 27
+console.log('milissegundo', data.getMilliseconds()); // milissegundo 0
 console.log('dia da semana', data.getDay()); // 4 (Quinta-feira)
 
-console.log(Date.now()); // Retorna o timestamp atual em milissegundos
+console.log(Date.now()); // Ex.: 1787146200000 (o resultado muda a cada execução)
 const data2 = new Date(1785267986461); // Cria data a partir do timestamp
-console.log(data2.toString());
+console.log(data2.toString()); // Ex.: Tue Jul 28 2026 16:46:26 GMT-0300
 ```
 
 # Aula 27 - Switch/Case
@@ -805,7 +872,7 @@ Nesta aula, conhecemos a estrutura condicional `switch/case`, indicada para simp
 
 Exemplos de código:
 ```javascript
-const date = new Date();
+const date = new Date(2026, 7, 19); // 19 de agosto de 2026
 const diaSemana = date.getDay();
 let diaSemanaTexto; 
 
@@ -835,7 +902,7 @@ switch (diaSemana) {
         diaSemanaTexto = '';
 }
 
-console.log(diaSemana, diaSemanaTexto);
+console.log(diaSemana, diaSemanaTexto); // 3 Quarta-feira
 ```
 
 # Aula 28 - Mais diferenças entre var, let e const
@@ -889,7 +956,7 @@ let b = 'B';
 let c = 'C';
 const abc = [b, c, a];
 [a, b, c] = abc; // a = 'B', b = 'C', c = 'A'
-console.log(a, b, c);
+console.log(a, b, c); // B C A
 
 // Extração básica e operador Rest
 const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -945,7 +1012,7 @@ const {
 console.log(rua, numero); // Rua A 123
 
 const { sobrenome, ...resto } = pessoa;
-console.log(resto); // nome, idade e endereco
+console.log(resto); // { nome: 'Eloisa', idade: 20, endereco: { rua: 'Rua A', numero: 123 } }
 ```
 
 # Aula 31 - For Clássico
@@ -968,18 +1035,18 @@ for (inicializacao; condicao; atualizacao) {
 Exemplos:
 ```javascript
 for (let i = 0; i <= 5; i++) {
-    console.log(`Linha ${i}`);
+    console.log(`Linha ${i}`); // Linha 0 até Linha 5, uma por repetição
 }
 
 for (let i = 0; i <= 10; i++) {
     const tipo = i % 2 === 0 ? 'par' : 'ímpar';
-    console.log(`${i} é ${tipo}`);
+    console.log(`${i} é ${tipo}`); // 0 é par, 1 é ímpar, ..., 10 é par
 }
 
 const frutas = ['Maçã', 'Banana', 'Uva', 'Pera'];
 
 for (let i = 0; i < frutas.length; i++) {
-    console.log(`Índice ${i}: ${frutas[i]}`);
+    console.log(`Índice ${i}: ${frutas[i]}`); // Índice 0: Maçã até Índice 3: Pera
 }
 ```
 
@@ -998,7 +1065,7 @@ Nesta aula, aprendemos que o DOM (*Document Object Model*) representa o document
 
 Exemplo:
 ```javascript
-const container = document.querySelector('.container');
+const container = document.querySelector('.container'); // Primeiro elemento com a classe container
 const div = document.createElement('div');
 const paragrafo = document.createElement('p');
 const texto = document.createTextNode('Frase criada com JavaScript');
@@ -1074,15 +1141,17 @@ Exemplos:
 const nomes = ['Eloisa Reis', 'Ravena'];
 
 for (const nome of nomes) {
-    console.log(nome); // Retorna cada valor
+    console.log(nome); // Eloisa Reis e depois Ravena
 }
 
 for (const letra of 'JavaScript') {
-    console.log(letra); // Retorna uma letra por vez
+    console.log(letra); // J, a, v, a, S, c, r, i, p, t (uma letra por repetição)
 }
 
 nomes.forEach(function (valor, indice, array) {
-    console.log(valor, indice, array);
+    console.log(valor, indice, array); // Resultados detalhados abaixo
+    // 1ª chamada: Eloisa Reis 0 ['Eloisa Reis', 'Ravena']
+    // 2ª chamada: Ravena 1 ['Eloisa Reis', 'Ravena']
 });
 ```
 
@@ -1118,7 +1187,7 @@ Exemplos:
 let controle = 0;
 
 while (controle <= 3) {
-    console.log(controle);
+    console.log(controle); // 0, 1, 2 e 3 (um número por repetição)
     controle++;
 }
 
@@ -1131,7 +1200,7 @@ let numeroAleatorio;
 
 do {
     numeroAleatorio = random(1, 50);
-    console.log(numeroAleatorio);
+    console.log(numeroAleatorio); // Exibe cada sorteio até que o resultado seja 10
 } while (numeroAleatorio !== 10);
 ```
 
@@ -1152,7 +1221,7 @@ for (const numero of numeros) {
         continue; // Pula apenas os números 2 e 5
     }
 
-    console.log(numero);
+    console.log(numero); // 1, 3, 4, 6 e 7 (um número por repetição)
 
     if (numero === 7) {
         break; // Encerra o laço ao chegar no número 7
@@ -1181,10 +1250,23 @@ function soma(x, y) {
 }
 
 try {
-    console.log(soma(1, 2));
-    console.log(soma('1', '2'));
+    console.log(soma(1, 2)); // 3
+    console.log(soma('1', '2')); // Lança TypeError; esta linha não exibe um resultado
 } catch (erro) {
-    console.log('Não foi possível realizar a soma.');
+    console.log('Não foi possível realizar a soma.'); // Não foi possível realizar a soma.
+}
+```
+
+Exemplos dos outros objetos de erro citados:
+```javascript
+const erroGenerico = new Error('Algo deu errado');
+console.log(erroGenerico.name); // Error
+console.log(erroGenerico.message); // Algo deu errado
+
+try {
+    console.log(variavelQueNaoExiste); // Lança ReferenceError
+} catch (erro) {
+    console.log(erro.name); // ReferenceError
 }
 ```
 
@@ -1218,11 +1300,11 @@ function retornaHora(data) {
 }
 
 try {
-    console.log(retornaHora(new Date()));
+    console.log(retornaHora(new Date())); // Ex.: 14:30:00 (depende do horário atual)
 } catch (erro) {
-    console.log('Erro ao obter o horário.');
+    console.log('Erro ao obter o horário.'); // Só aparece se ocorrer um erro
 } finally {
-    console.log('Finalizando...');
+    console.log('Finalizando...'); // Finalizando... (sempre é executado)
 }
 ```
 
@@ -1245,11 +1327,11 @@ function mostraHora() {
 }
 
 const timer = setInterval(function () {
-    console.log(mostraHora());
+    console.log(mostraHora()); // Exibe o horário atual aproximadamente a cada segundo
 }, 1000);
 
 setTimeout(function () {
-    clearInterval(timer);
+    clearInterval(timer); // Interrompe o intervalo após aproximadamente 10 segundos
 }, 10000);
 ```
 
@@ -1274,7 +1356,7 @@ input.addEventListener('keydown', function (event) {
     if (event.key === 'Enter' && input.value) {
         criaTarefa(input.value);
         input.value = '';
-        input.focus();
+        input.focus(); // O cursor volta para o campo
     }
 });
 ```
@@ -1295,9 +1377,10 @@ Exemplo:
 ```javascript
 function criaBotaoApagar(li) {
     const botao = document.createElement('button');
-    botao.innerText = 'Apagar';
-    botao.setAttribute('class', 'apagar');
-    li.appendChild(botao);
+    botao.innerText = 'Apagar'; // O texto visível do botão passa a ser "Apagar"
+    botao.setAttribute('class', 'apagar'); // O botão recebe class="apagar"
+    console.log(botao.classList.contains('apagar')); // true
+    li.appendChild(botao); // O botão passa a ser filho do <li>
 }
 ```
 
@@ -1315,7 +1398,7 @@ document.addEventListener('click', function (event) {
     const elemento = event.target;
 
     if (elemento.classList.contains('apagar')) {
-        elemento.parentElement.remove();
+        elemento.parentElement.remove(); // Remove o <li> que contém o botão clicado
     }
 });
 ```
@@ -1332,9 +1415,10 @@ Exemplo:
 ```javascript
 const lista = document.querySelector('.tarefas');
 const itens = lista.querySelectorAll('li');
+console.log(itens.length); // Ex.: 3, quando a lista possui três itens
 
 for (const item of itens) {
-    console.log(item.innerText);
+    console.log(item.innerText); // Exibe o texto de cada <li>, um por repetição
 }
 ```
 
@@ -1391,6 +1475,20 @@ function carregarTarefas() {
 }
 
 const tarefasSalvas = carregarTarefas();
+console.log(tarefasSalvas); // Ex.: ['Estudar', 'Praticar'] ou [] na primeira execução
+```
+
+Os métodos de remoção podem ser observados com um item temporário:
+```javascript
+localStorage.setItem('tema', 'escuro');
+console.log(localStorage.getItem('tema')); // escuro
+
+localStorage.removeItem('tema');
+console.log(localStorage.getItem('tema')); // null
+
+localStorage.setItem('idioma', 'pt-BR');
+localStorage.clear();
+console.log(localStorage.getItem('idioma')); // null
 ```
 
 # Exercícios - Conhecimentos apresentados apenas nos exercícios
@@ -1412,10 +1510,11 @@ const paragrafos = document.querySelector('.paragrafos');
 const listaDeParagrafos = paragrafos.querySelectorAll('p');
 const estilosDoBody = getComputedStyle(document.body);
 const corDoFundo = estilosDoBody.backgroundColor;
+console.log(corDoFundo); // Ex.: rgb(17, 86, 102)
 
 for (const paragrafo of listaDeParagrafos) {
-    paragrafo.style.backgroundColor = corDoFundo;
-    paragrafo.style.color = '#fff';
+    paragrafo.style.backgroundColor = corDoFundo; // Aplica a cor de fundo calculada
+    paragrafo.style.color = '#fff'; // Altera a cor do texto para branco
 }
 ```
 
@@ -1460,6 +1559,7 @@ console.log(!!0);         // false
 console.log(!!'Eloisa');  // true
 console.log(!!'');        // false
 console.log(!!null);      // false
+console.log(Boolean('Eloisa')); // true (resultado equivalente a !!'Eloisa')
 ```
 
 Quando a expressão já é uma comparação, ela já retorna `true` ou `false` e não precisa de `!!`:
@@ -1467,6 +1567,7 @@ Quando a expressão já é uma comparação, ela já retorna `true` ou `false` e
 ```javascript
 const numero = 10;
 const inteiro = Math.round(numero) === numero;
+console.log(inteiro); // true
 ```
 
 ## Acessos Adicionais ao DOM e Seleção por ID
@@ -1480,7 +1581,9 @@ Além dos recursos apresentados na Aula 32, os exercícios utilizam estas formas
 Exemplo:
 ```javascript
 const titulo = document.getElementById('titulo');
-console.log(document.body);
+console.log(titulo); // Ex.: <h1 id="titulo">Título</h1>, ou null se não for encontrado
+console.log(document.body); // Exibe o elemento <body> completo
+console.log(window.document === document); // true
 ```
 
 O atributo `id` deve ser único na página para identificar corretamente um elemento.
@@ -1498,10 +1601,12 @@ Exemplos:
 const resultado = document.querySelector('.resultado');
 
 resultado.innerHTML = '<strong>Resultado</strong>';
+// A área passa a exibir "Resultado" em negrito
 resultado.innerHTML += '<p>Novo resultado</p>';
+// Um novo parágrafo é acrescentado à área
 
 const nome = document.querySelector('.nome');
-console.log(nome.value);
+console.log(nome.value); // Ex.: Eloisa (depende do texto digitado)
 ```
 
 Valores obtidos de elementos `<input>` são strings. Para utilizá-los em cálculos, é necessário convertê-los:
@@ -1509,6 +1614,7 @@ Valores obtidos de elementos `<input>` são strings. Para utilizá-los em cálcu
 ```javascript
 const campoPeso = document.querySelector('.peso');
 const peso = Number(campoPeso.value);
+console.log(peso); // Ex.: 70.5, se o campo contiver o texto "70.5"
 ```
 
 Como `innerHTML` interpreta tags, ele não deve receber conteúdo desconhecido sem validação.
@@ -1556,7 +1662,7 @@ const form = document.querySelector('.form');
 
 function recebeEvento(event) {
     event.preventDefault();
-    console.log('Formulário enviado');
+    console.log('Formulário enviado'); // Formulário enviado
 }
 
 form.addEventListener('submit', recebeEvento);
@@ -1571,7 +1677,7 @@ function externa() {
     const nome = 'Eloisa';
 
     function interna() {
-        console.log(nome);
+        console.log(nome); // Eloisa
     }
 
     interna();
@@ -1588,7 +1694,9 @@ function configurarCadastro() {
 
     function adicionarPessoa(nome) {
         pessoas.push({ nome });
-        console.log(pessoas);
+        console.log(pessoas); // Resultados detalhados abaixo
+        // 1ª chamada: [{ nome: 'Eloisa' }]
+        // 2ª chamada: [{ nome: 'Eloisa' }, { nome: 'Ravena' }]
     }
 
     return adicionarPessoa;
@@ -1607,7 +1715,7 @@ Declarar uma função e chamá-la na linha seguinte é uma chamada normal:
 
 ```javascript
 function escopo() {
-    console.log('Executando');
+    console.log('Executando'); // Executando
 }
 
 escopo();
@@ -1617,7 +1725,7 @@ Uma IIFE (*Immediately Invoked Function Expression*) é uma expressão de funç�
 
 ```javascript
 (function () {
-    console.log('Executada imediatamente');
+    console.log('Executada imediatamente'); // Executada imediatamente
 })();
 ```
 
@@ -1625,7 +1733,7 @@ Também pode ser escrita como Arrow Function:
 
 ```javascript
 (() => {
-    console.log('Executada imediatamente');
+    console.log('Executada imediatamente'); // Executada imediatamente
 })();
 ```
 
@@ -1742,8 +1850,7 @@ const opcoes = {
     timeStyle: 'short'
 };
 
-console.log(data.toLocaleString('pt-BR', opcoes));
-// Exemplo: segunda-feira, 17 de agosto de 2026 às 14:30
+console.log(data.toLocaleString('pt-BR', opcoes)); // Ex.: quarta-feira, 19 de agosto de 2026 às 14:30
 ```
 
 Esse método pode substituir a criação manual dos nomes dos dias da semana e dos meses com vários blocos `switch/case`.
@@ -1768,7 +1875,10 @@ Exemplo:
 const relogio = document.querySelector('.relogio');
 
 relogio.classList.add('pausado');
+// O elemento passa a receber os estilos da classe .pausado
+
 relogio.classList.remove('pausado');
+// O elemento deixa de receber os estilos da classe .pausado
 ```
 
 ## Opção timeZone na Formatação de Horas
